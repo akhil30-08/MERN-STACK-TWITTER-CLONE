@@ -1,11 +1,9 @@
-config
-config.js
+
 node_modules
 dist
 dist-ssr
 *.local
-/config.js
-config*
+
 
 
 # Editor directories and files
