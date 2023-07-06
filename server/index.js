@@ -29,4 +29,9 @@ app.use('/api/tweet', require('./routes/tweet'));
 app.use(router); //profile picture download
 app.use(tweetRouter); //tweetpicture download
 
+//testing route
+app.get('/deploy', (req, res) => {
+  return res.status(200).send('Welcome to deployment');
+});
+
 app.listen(8000, () => console.log('Server Connected at Port 8000'));
