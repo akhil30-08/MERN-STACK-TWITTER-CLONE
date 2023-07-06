@@ -1,0 +1,50 @@
+.side-bar-row {
+  border-right: 1px solid rgb(218, 211, 211);
+  height: 100vh;
+  position: fixed !important;
+  width: 24.5% !important;
+}
+
+body {
+  overflow-x: hidden;
+  background-color: #fff;
+}
+
+img.side-bar-profile-icon {
+  border-radius: 50% !important;
+  width: 4.5rem;
+  height: 4.5rem;
+}
+
+.nav-section button {
+  min-width: 116%;
+  color: black;
+  background-color: #fff;
+  border: none;
+  margin: 4px;
+  border-radius: 1rem;
+}
+
+.home-button {
+  background-color: rgb(160, 212, 228) !important;
+}
+
+.nav-section button:hover {
+  background-color: rgb(160, 212, 228);
+  color: black;
+}
+
+.nav-section button:active {
+  background-color: rgb(160, 212, 228) !important;
+  color: black !important;
+}
+
+.username-info:hover {
+  background-color: rgb(160, 212, 228);
+}
+
+.second-column {
+  border-right: 1px solid rgb(218, 211, 211);
+  min-height: 100vh;
+  max-height: fit-content;
+}

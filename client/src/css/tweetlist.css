@@ -1,0 +1,17 @@
+.homepage-tweet-btn {
+  width: 7rem;
+  background-color: rgb(22, 161, 225) !important;
+  border: none;
+}
+
+.homepage-tweet-btn:hover {
+  background-color: rgb(22, 161, 225);
+}
+
+.home-button:hover {
+  background-color: rgb(160, 212, 228) !important;
+}
+
+.home-button {
+  background-color: rgb(160, 212, 228);
+}

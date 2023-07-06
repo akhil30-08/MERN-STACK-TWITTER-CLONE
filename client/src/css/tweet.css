@@ -1,0 +1,51 @@
+.tweet-profile-pic {
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 50%;
+}
+
+.username-mentioned {
+  color: black;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.username-mentioned:hover {
+  text-decoration: underline;
+}
+
+.tweet-content {
+  margin-left: 10%;
+}
+
+.fa-heart {
+  color: rgb(201, 44, 75);
+}
+
+.fa-comment {
+  color: rgb(47, 84, 216);
+}
+
+.fa-retweet {
+  color: rgb(83, 173, 164);
+}
+
+.tweet-card {
+  margin: 0.2%;
+}
+
+.tweet-card:hover {
+  background-color: rgb(212, 226, 230);
+}
+
+.like-button:hover {
+  background-color: rgb(169, 214, 226);
+}
+
+.comment-button:hover {
+  background-color: rgb(169, 214, 226);
+}
+
+.retweet-button:hover {
+  background-color: rgb(169, 214, 226);
+}

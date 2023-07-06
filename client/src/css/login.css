@@ -1,0 +1,22 @@
+body {
+  background-color: whitesmoke;
+}
+
+#left-box-login {
+  background-color: rgb(22, 161, 225);
+  color: white;
+}
+
+button {
+  background-color: black;
+  color: white;
+  border-radius: 0.3rem;
+}
+
+div.card-body {
+  padding: 0;
+}
+
+#login-text {
+  margin-top: 16%;
+}
