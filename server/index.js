@@ -6,13 +6,15 @@ const { MONGODB_URL } = require('./config');
 const app = express();
 const { router } = require('./multer-configuration/profile-image');
 const { tweetRouter } = require('./multer-configuration/tweet-image');
+const dotenv = require('dotenv');
+dotenv.config();
 
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 //Connecting to MONGODB
-mongoose.connect(MONGODB_URL);
+mongoose.connect(process.env.MONGODBURL);
 
 //Checking if it is connected
 mongoose.connection.on('connected', () => console.log('DB Connected'));
