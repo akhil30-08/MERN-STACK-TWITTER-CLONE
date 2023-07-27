@@ -45,10 +45,12 @@ function Signup() {
     e.preventDefault();
 
     try {
-      const request = await axios.post(
-        'http://localhost:8000/api/auth/signup',
-        { Name, Username, Email, Password }
-      );
+      const request = await axios.post('/api/auth/signup', {
+        Name,
+        Username,
+        Email,
+        Password,
+      });
       console.log(request.data);
       navigate('/');
       notify();
@@ -91,6 +93,7 @@ function Signup() {
                     placeholder='Full Name'
                     value={Name}
                     onChange={(e) => setName(e.target.value)}
+                    autoComplete='current-password'
                   ></input>
                   <input
                     type='email'

@@ -46,7 +46,7 @@ function Login() {
     e.preventDefault();
     dispatch(loginStart());
     try {
-      const request = await axios.post('http://localhost:8000/api/auth/login', {
+      const request = await axios.post('/api/auth/login', {
         Username,
         Password,
       });
