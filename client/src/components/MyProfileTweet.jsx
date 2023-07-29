@@ -13,7 +13,7 @@ const MyProfileTweet = () => {
     const fetchData = async () => {
       try {
         const timelinetweets = await axios.get(
-          `http://localhost:8000/api/tweet/tweets/user/${currentUser._id}`,
+          `/api/tweet/tweets/user/${currentUser._id}`,
           {
             headers: {
               Authorization: localStorage.getItem('token'),

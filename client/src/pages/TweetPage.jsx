@@ -24,10 +24,7 @@ const TweetPage = () => {
   //fetch tweet data from backend
   const fetchTweetData = async () => {
     try {
-      const tweetData = await axios.get(
-        `http://localhost:8000/api/tweet/${id}`,
-        config
-      );
+      const tweetData = await axios.get(`/api/tweet/${id}`, config);
       setTimeline([...timeline, tweetData.data]);
     } catch (error) {
       console.log(error);
@@ -47,10 +44,7 @@ const TweetPage = () => {
       if (timeline[0].Replies) {
         const fetchedReplies = await Promise.all(
           timeline[0].Replies.map(async (tweetId) => {
-            const response = await axios.get(
-              `http://localhost:8000/api/tweet/${tweetId}`,
-              config
-            );
+            const response = await axios.get(`/api/tweet/${tweetId}`, config);
             return response.data;
           })
         );

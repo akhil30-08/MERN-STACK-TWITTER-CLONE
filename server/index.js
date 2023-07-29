@@ -33,7 +33,7 @@ app.use(tweetRouter); //tweetpicture download
 
 //testing route
 app.get('/deploy', (req, res) => {
-  return res.status(200).send('Welcome to deployment');
+  return res.status(200).send(`<h1>Deployed successfully</h1>`);
 });
 
 app.listen(8000, () => console.log('Server Connected at Port 8000'));

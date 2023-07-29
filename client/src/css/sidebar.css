@@ -48,3 +48,8 @@ img.side-bar-profile-icon {
   min-height: 100vh;
   max-height: fit-content;
 }
+
+.fa-twitter {
+  font-size: xx-large;
+  margin-left: 53%;
+}

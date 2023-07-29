@@ -8,6 +8,7 @@ import TweetPage from './pages/TweetPage.jsx';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import UsersProfile from './pages/UsersProfile.jsx';
+import Spinner from './components/Spinner.jsx';
 
 function App() {
   return (

@@ -93,7 +93,7 @@ const MyProfile = () => {
     if (form.checkValidity() === true) {
       const updateUserInfo = async () => {
         const update = await axios.put(
-          `http://localhost:8000/api/user/${currentUser._id}`,
+          `/api/user/${currentUser._id}`,
           { Name, Location, DateOfBirth },
           config
         );
@@ -102,7 +102,7 @@ const MyProfile = () => {
 
       //now update the current user
       const updatedCurrentUser = await axios.get(
-        `http://localhost:8000/api/user/${currentUser._id}`,
+        `/api/user/${currentUser._id}`,
         config
       );
       dispatch(updateUser(updatedCurrentUser.data));
@@ -124,7 +124,7 @@ const MyProfile = () => {
       const formData = new FormData();
       formData.append('Profile_Picture', Profile_Picture);
       const submission = await axios.post(
-        `http://localhost:8000/api/user/${currentUser._id}/uploadProfilePic`,
+        `/api/user/${currentUser._id}/uploadProfilePic`,
         formData,
         {
           headers: {
@@ -135,7 +135,7 @@ const MyProfile = () => {
       );
       //now update the current user
       const updatedCurrentUser = await axios.get(
-        `http://localhost:8000/api/user/${currentUser._id}`,
+        `/api/user/${currentUser._id}`,
         config
       );
       dispatch(updateUser(updatedCurrentUser.data));
@@ -155,10 +155,9 @@ const MyProfile = () => {
         'https://1fid.com/wp-content/uploads/2022/06/no-profile-picture-4-1024x1024.jpg'
       )
     ) {
-      const picture = await axios.get(
-        `http://localhost:8000/files/${currentUser.Profile_Picture}`,
-        { responseType: 'blob' }
-      );
+      const picture = await axios.get(`/files/${currentUser.Profile_Picture}`, {
+        responseType: 'blob',
+      });
       setPictureToShow(URL.createObjectURL(picture.data));
     }
   };

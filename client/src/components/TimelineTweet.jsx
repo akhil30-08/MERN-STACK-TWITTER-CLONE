@@ -10,14 +10,11 @@ const TimelineTweet = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const timelinetweets = await axios.get(
-          'http://localhost:8000/api/tweet',
-          {
-            headers: {
-              Authorization: localStorage.getItem('token'),
-            },
-          }
-        );
+        const timelinetweets = await axios.get('/api/tweet', {
+          headers: {
+            Authorization: localStorage.getItem('token'),
+          },
+        });
         setTimeline(timelinetweets.data);
       } catch (error) {
         console.log(error);

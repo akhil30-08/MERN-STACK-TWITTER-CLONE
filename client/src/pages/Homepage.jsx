@@ -51,19 +51,15 @@ const Homepage = () => {
         formData.append('Image', Image);
       }
 
-      const submission = await axios.post(
-        `http://localhost:8000/api/tweet`,
-        formData,
-        {
-          headers: {
-            Authorization: localStorage.getItem('token'),
-            'Content-Type': 'multipart/form-data',
-          },
-        }
-      );
+      const submission = await axios.post(`/api/tweet`, formData, {
+        headers: {
+          Authorization: localStorage.getItem('token'),
+          'Content-Type': 'multipart/form-data',
+        },
+      });
       //now update the current user
       const updatedCurrentUser = await axios.get(
-        `http://localhost:8000/api/user/${currentUser._id}`,
+        `/api/user/${currentUser._id}`,
         config
       );
       dispatch(updateUser(updatedCurrentUser.data));
@@ -98,8 +94,8 @@ const Homepage = () => {
           </Helmet>
 
           <div className='row'>
-            <div className='col-md-3 '>
-              <div className='side-bar-row d-flex flex-column align-items-center justify-content-between  '>
+            <div className='col-12 col-md-3 '>
+              <div className='side-bar-row'>
                 <Sidebar />
               </div>
             </div>
@@ -126,7 +122,7 @@ const Homepage = () => {
               </div>
             </div>
 
-            <div className='col-md-3'></div>
+            <div className='col-md-3 d-none d-md-block'></div>
           </div>
 
           {/* for showing modal component */}

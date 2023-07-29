@@ -8,11 +8,13 @@ import { loginFailed, loginStart, loginSuccess } from '../redux/userSlice';
 
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Spinner from '../components/Spinner';
 
 function Login() {
   //to handle state of Email and Password
   const [Username, setUsername] = useState('');
   const [Password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
 
   //initialise usenavigate and usedispatch
   const navigate = useNavigate();
@@ -45,6 +47,7 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     dispatch(loginStart());
+    setLoading(true);
     try {
       const request = await axios.post('/api/auth/login', {
         Username,

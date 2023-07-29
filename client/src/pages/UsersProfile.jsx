@@ -39,14 +39,11 @@ const MyProfile = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const findUser = await axios.get(
-          `http://localhost:8000/api/user/${id}`,
-          {
-            headers: {
-              Authorization: localStorage.getItem('token'),
-            },
-          }
-        );
+        const findUser = await axios.get(`/api/user/${id}`, {
+          headers: {
+            Authorization: localStorage.getItem('token'),
+          },
+        });
         console.log('fetch data');
         setUser(findUser.data);
       } catch (error) {
@@ -67,14 +64,14 @@ const MyProfile = () => {
 
       if (followState == 'Follow') {
         const followUser = await axios.put(
-          `http://localhost:8000/api/user/${id}/follow`,
+          `/api/user/${id}/follow`,
           {},
           config
         );
 
         //now update the current user
         const updatedCurrentUser = await axios.get(
-          `http://localhost:8000/api/user/${currentUser._id}`,
+          `/api/user/${currentUser._id}`,
           config
         );
         dispatch(updateUser(updatedCurrentUser.data));
@@ -82,14 +79,14 @@ const MyProfile = () => {
         setFollowState('Following');
       } else {
         const unfollowUser = await axios.put(
-          `http://localhost:8000/api/user/${id}/unfollow`,
+          `/api/user/${id}/unfollow`,
           {},
           config
         );
 
         //now update the current user
         const updatedCurrentUser = await axios.get(
-          `http://localhost:8000/api/user/${currentUser._id}`,
+          `/api/user/${currentUser._id}`,
           config
         );
         dispatch(updateUser(updatedCurrentUser.data));
@@ -129,10 +126,9 @@ const MyProfile = () => {
   //now get the profile picture of the current user
   const getProfilePicture = async () => {
     if (user && user.Profile_Picture) {
-      const picture = await axios.get(
-        `http://localhost:8000/files/${user.Profile_Picture}`,
-        { responseType: 'blob' }
-      );
+      const picture = await axios.get(`/files/${user.Profile_Picture}`, {
+        responseType: 'blob',
+      });
       console.log('ok');
       setPictureToShow(URL.createObjectURL(picture.data));
     }
