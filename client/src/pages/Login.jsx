@@ -8,7 +8,7 @@ import { loginFailed, loginStart, loginSuccess } from '../redux/userSlice';
 
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Spinner from '../components/Spinner';
+import LoadingSpinner from '../components/Spinner';
 
 function Login() {
   //to handle state of Email and Password
@@ -65,7 +65,7 @@ function Login() {
     } catch (error) {
       dispatch(loginFailed());
       notifyError();
-      console.log(error);
+      // setLoading(false);
     }
   };
 
@@ -113,6 +113,8 @@ function Login() {
                   <button type='submit' className='mt-3 px-3 btn btn-dark'>
                     Login
                   </button>
+
+                  {loading && <LoadingSpinner />}
                 </form>
                 <p className='mt-4 ms-4 '>
                   <span className='text-muted'>Don't have an account?</span>{' '}

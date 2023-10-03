@@ -9,7 +9,6 @@ export default defineConfig({
       '/api': {
         target: 'https://twitter-akhil-backend.onrender.com',
         changeOrigin: true,
-        secure: false,
       },
     },
   },

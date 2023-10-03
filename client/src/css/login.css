@@ -20,3 +20,9 @@ div.card-body {
 #login-text {
   margin-top: 16%;
 }
+
+.spinner {
+  margin-left: 2rem;
+  position: relative;
+  top: 1em;
+}

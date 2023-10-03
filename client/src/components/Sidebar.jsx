@@ -61,21 +61,22 @@ const Sidebar = () => {
 
   return (
     <>
-      <Navbar expand='lg' className='bg-body-tertiary'>
+      <Navbar expand='lg'>
         <Container>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav
               style={{ height: '100vh' }}
-              className='me-auto d-flex flex-column justify-content-between'
+              className='me-auto d-flex flex-column justify-content-between navbarr'
             >
+              {/* div containing buttons */}
               <div className='d-flex flex-column nav-section'>
                 <i
                   className='fa-brands fa-twitter  my-3 fa-lg'
                   style={{ color: 'rgb(22, 161, 225)' }}
                 ></i>
                 <NavLink to='/home'>
-                  <button className='btn btn-primary home-button'>
+                  <button className='btn btn-primary home-button mx-lg-4 mx-xl-5'>
                     <span>
                       <i className='fa-solid fa-home' />
                     </span>{' '}
@@ -89,7 +90,7 @@ const Sidebar = () => {
                 >
                   <button
                     type='submit'
-                    className='btn btn-primary profile-button'
+                    className='btn btn-primary profile-button mx-lg-4 mx-xl-5'
                   >
                     <span>
                       <i className='fa-solid fa-user' />
@@ -99,7 +100,10 @@ const Sidebar = () => {
                 </NavLink>
 
                 <NavLink to='/'>
-                  <button onClick={handleLogOut} className='btn btn-primary'>
+                  <button
+                    onClick={handleLogOut}
+                    className='btn btn-primary mx-lg-4 mx-xl-5'
+                  >
                     <span>
                       <i className='fa-solid fa-right-from-bracket'></i>
                     </span>{' '}
@@ -107,13 +111,15 @@ const Sidebar = () => {
                   </button>
                 </NavLink>
               </div>
+
+              {/* div containing info */}
               <div className='mb-3 d-flex username-info'>
                 <NavLink to='/my-profile' className='text-decoration-none '>
                   {!PictureToShow ? (
                     <img
                       src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR82DN9JU-hbIhhkPR-AX8KiYzA4fBMVwjLAG82fz7GLg&s'
                       alt='profile-pic'
-                      className=' side-bar-profile-icon ms-2 img-fluid d-inline-block mb-2'
+                      className=' side-bar-profile-icon ms-2 ms-md-5 img-fluid d-inline-block mb-4'
                     />
                   ) : (
                     <img
@@ -124,7 +130,7 @@ const Sidebar = () => {
                   )}
                   <ul
                     style={{ listStyleType: 'none' }}
-                    className='text-black d-inline-block'
+                    className='text-black d-inline-block me-md-3'
                   >
                     <li>
                       <h6>{currentUser.Name}</h6>

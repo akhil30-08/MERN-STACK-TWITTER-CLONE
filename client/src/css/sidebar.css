@@ -3,6 +3,7 @@
   height: 100vh;
   position: fixed !important;
   width: 24.5% !important;
+  background-color: #fff;
 }
 
 body {
@@ -17,7 +18,7 @@ img.side-bar-profile-icon {
 }
 
 .nav-section button {
-  min-width: 116%;
+  min-width: 90%;
   color: black;
   background-color: #fff;
   border: none;
@@ -27,6 +28,7 @@ img.side-bar-profile-icon {
 
 .home-button {
   background-color: rgb(160, 212, 228) !important;
+  min-width: 90%;
 }
 
 .nav-section button:hover {
@@ -52,4 +54,8 @@ img.side-bar-profile-icon {
 .fa-twitter {
   font-size: xx-large;
   margin-left: 53%;
+}
+
+.navbarr {
+  background-color: #fff;
 }

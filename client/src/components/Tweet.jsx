@@ -9,7 +9,7 @@ import axios from 'axios';
 import { format } from 'date-fns';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import Spinner from './Spinner';
+import LoadingSpinner from './Spinner';
 
 const Tweet = ({ tweet, setData }) => {
   //to deal with reply modal
@@ -17,10 +17,14 @@ const Tweet = ({ tweet, setData }) => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  //state to handle spinner
+  const [loading, setLoading] = useState(false);
+
   //delete tweet modal
   const [showDelete, setShowDelete] = useState(false);
 
   const handleCloseDelete = () => setShowDelete(false);
+
   const handleShowDelete = (e) => {
     e.preventDefault();
     setShowDelete(true);
@@ -103,15 +107,15 @@ const Tweet = ({ tweet, setData }) => {
     };
 
     fetchData();
-  }, [tweet.TweetedBy._id, tweet.Likes, tweet.Replies, tweet.RetweetBy]);
+  }, [tweet.TweetedBy._id, tweet.Replies, tweet.RetweetBy]);
 
   const handleLikeUnlike = async (e) => {
     e.preventDefault();
-    <Spinner />;
 
     //if likes have user's like , we will unlike it
     if (tweet.Likes.includes(currentUser._id)) {
       try {
+        setLoading(true);
         const unlike = await axios.post(
           `/api/tweet/${tweet._id}/dislike`,
           {},
@@ -150,9 +154,12 @@ const Tweet = ({ tweet, setData }) => {
         }
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     } else {
       try {
+        setLoading(true);
         const like = await axios.post(
           `/api/tweet/${tweet._id}/like`,
           {},
@@ -191,6 +198,8 @@ const Tweet = ({ tweet, setData }) => {
         }
       } catch (error) {
         console.log(error);
+      } finally {
+        setLoading(false);
       }
     }
   };
@@ -200,6 +209,7 @@ const Tweet = ({ tweet, setData }) => {
     handleCloseDelete();
 
     try {
+      setLoading(true);
       const deleteTweet = await axios.delete(`/api/tweet/${tweet._id}`, config);
 
       notifyTweetDeleted();
@@ -224,6 +234,8 @@ const Tweet = ({ tweet, setData }) => {
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -404,6 +416,7 @@ const Tweet = ({ tweet, setData }) => {
   //function to reply to a tweet
   const handleReply = async (e) => {
     e.preventDefault();
+    setLoading(true);
     const reply = await axios.post(
       `/api/tweet/${tweet._id}/reply`,
       { Content },
@@ -436,10 +449,12 @@ const Tweet = ({ tweet, setData }) => {
 
       setData([newData.data]);
     }
+    setLoading(false);
   };
 
   return (
     <>
+      {loading && <LoadingSpinner />}
       {userData && (
         <>
           <Link

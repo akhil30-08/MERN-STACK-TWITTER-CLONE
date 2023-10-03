@@ -49,3 +49,14 @@
 .retweet-button:hover {
   background-color: rgb(169, 214, 226);
 }
+
+.spinner {
+  position: absolute;
+  top: 8px;
+}
+
+@media screen and (min-width: 720px) {
+  .spinner {
+    left: 4em;
+  }
+}

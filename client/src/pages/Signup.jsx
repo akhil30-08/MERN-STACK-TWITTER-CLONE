@@ -3,6 +3,7 @@ import '../css/login.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Helmet } from 'react-helmet-async';
+import LoadingSpinner from '../components/Spinner';
 
 //import reacttoastify
 import { ToastContainer, toast } from 'react-toastify';
@@ -16,6 +17,9 @@ function Signup() {
   const [Username, setUsername] = useState('');
   const [Email, setEmail] = useState('');
   const [Password, setPassword] = useState('');
+
+  //state to handle the loading spinner
+  const [loading, setLoading] = useState(false);
 
   //notification function
   const notify = () =>
@@ -43,6 +47,7 @@ function Signup() {
   //function to submit the form
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
       const request = await axios.post('/api/auth/signup', {
@@ -56,7 +61,7 @@ function Signup() {
       notify();
     } catch (error) {
       notifyError();
-      console.log(error);
+      setLoading(true);
     }
   };
 
@@ -118,9 +123,11 @@ function Signup() {
                     value={Password}
                     onChange={(e) => setPassword(e.target.value)}
                   ></input>
-                  <button type='submit' className='mt-3 px-3'>
+                  <button type='submit' className='mt-3 px-3 btn btn-dark'>
                     Register
                   </button>
+
+                  {loading && <LoadingSpinner />}
                 </form>
                 <p className='mt-4 ms-4 '>
                   <span className='text-muted'>Already Registered?</span>{' '}
