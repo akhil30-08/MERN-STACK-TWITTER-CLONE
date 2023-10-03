@@ -1,11 +1,9 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const multer = require('multer');
 const { MONGODB_URL } = require('./config');
 const app = express();
-const { router } = require('./multer-configuration/profile-image');
-const { tweetRouter } = require('./multer-configuration/tweet-image');
+
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -28,8 +26,6 @@ require('./models/tweet_model');
 app.use('/API/auth', require('./routes/auth'));
 app.use('/API', require('./routes/user'));
 app.use('/api/tweet', require('./routes/tweet'));
-app.use(router); //profile picture download
-app.use(tweetRouter); //tweetpicture download
 
 //testing route
 app.get('/deploy', (req, res) => {

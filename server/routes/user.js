@@ -4,7 +4,13 @@ const mongoose = require('mongoose');
 const UserModel = mongoose.model('UserModel');
 const TweetModel = mongoose.model('TweetModel');
 const authMiddleware = require('../middleware/authorisation');
-const { upload } = require('../multer-configuration/profile-image');
+// const { upload } = require('../multer-configuration/profile-image');
+const uploadImage = require('../imageUpload');
+const multer = require('multer');
+const upload = multer({
+  storage: multer.diskStorage({}),
+  limits: { fileSize: 5000000000 },
+});
 
 // API to get details of a user
 router.get('/user/:id', authMiddleware, async (req, res) => {
@@ -144,20 +150,23 @@ router.post(
   authMiddleware,
   upload.single('Profile_Picture'),
   async (req, res) => {
-    console.log(req.file);
     try {
       if (!mongoose.Types.ObjectId.isValid(req.params.id)) {
         return res.status(404).send('User not found');
       }
 
+      //upload Image
+      const upload = await uploadImage(req.file.path);
+
       const user = await UserModel.findById(req.params.id);
-      user.Profile_Picture = `${req.file.filename}`;
+      user.Profile_Picture = upload;
       await user.save();
       return res
         .status(200)
         .json({ user: user, message: 'Uploaded Succesfully' });
     } catch (error) {
       console.log(error);
+      throw error;
     }
   }
 );

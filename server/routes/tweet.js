@@ -4,7 +4,12 @@ const mongoose = require('mongoose');
 const TweetModel = mongoose.model('TweetModel');
 const UserModel = mongoose.model('UserModel');
 const authMiddleware = require('../middleware/authorisation');
-const { upload } = require('../multer-configuration/tweet-image');
+const multer = require('multer');
+const uploadImage = require('../imageUpload');
+
+const upload = multer({
+  storage: multer.diskStorage({}),
+});
 
 //API to create a tweet
 router.post('/', authMiddleware, upload.single('Image'), async (req, res) => {
@@ -21,7 +26,8 @@ router.post('/', authMiddleware, upload.single('Image'), async (req, res) => {
     });
 
     if (req.file && Content) {
-      tweet.Image = `${req.file.filename}`;
+      const upload = await uploadImage(req.file.path);
+      tweet.Image = upload;
     }
 
     await tweet.save();
