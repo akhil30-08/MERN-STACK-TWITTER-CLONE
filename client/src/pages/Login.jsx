@@ -65,7 +65,7 @@ function Login() {
     } catch (error) {
       dispatch(loginFailed());
       notifyError();
-      // setLoading(false);
+      setLoading(false);
     }
   };
 
