@@ -155,10 +155,8 @@ const MyProfile = () => {
         'https://1fid.com/wp-content/uploads/2022/06/no-profile-picture-4-1024x1024.jpg'
       )
     ) {
-      const picture = await axios.get(`/files/${currentUser.Profile_Picture}`, {
-        responseType: 'blob',
-      });
-      setPictureToShow(URL.createObjectURL(picture.data));
+      const picture = `https://res.cloudinary.com/dbjfwfix8/image/upload/v1696357712/${currentUser.Profile_Picture}.jpg`;
+      setPictureToShow(picture);
     }
   };
 

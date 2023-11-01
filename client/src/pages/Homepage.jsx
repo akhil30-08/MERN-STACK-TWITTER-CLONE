@@ -35,6 +35,7 @@ const Homepage = () => {
   };
 
   const { currentUser } = useSelector((state) => state.user);
+  console.log(currentUser.Profile_Picture);
 
   const config = {
     headers: {

@@ -52,7 +52,7 @@ const MyProfile = () => {
     };
 
     fetchData();
-  }, []);
+  }, [followState]);
 
   //to handle follow/unfollow user
 

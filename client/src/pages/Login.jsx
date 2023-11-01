@@ -43,13 +43,17 @@ function Login() {
       theme: 'light',
     });
 
+  const Base_URL =
+    process.env.NODE_ENV !== 'development'
+      ? 'https://twitter-akhil-backend.onrender.com'
+      : '';
   //function to call LogIn API
   const handleLogin = async (e) => {
     e.preventDefault();
     dispatch(loginStart());
     setLoading(true);
     try {
-      const request = await axios.post('/api/auth/login', {
+      const request = await axios.post(`${Base_URL}/api/auth/login`, {
         Username,
         Password,
       });
@@ -68,6 +72,8 @@ function Login() {
       setLoading(false);
     }
   };
+
+  console.log(Base_URL);
 
   return (
     <>
