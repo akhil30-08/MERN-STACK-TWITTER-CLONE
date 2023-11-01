@@ -8,7 +8,7 @@ const path = require('path');
 const dotenv = require('dotenv');
 dotenv.config();
 
-app.use(cors({ origin: '*' }));
+app.use(cors({ origin: '*', credentials: true }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../client/dist')));
