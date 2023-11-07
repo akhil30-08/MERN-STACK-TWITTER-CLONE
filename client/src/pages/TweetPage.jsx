@@ -3,6 +3,7 @@ import '../css/tweetlist.css';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Helmet } from 'react-helmet-async';
+import Base_URL from '../utils';
 
 import Sidebar from '../components/Sidebar';
 import Tweet from '../components/Tweet';
@@ -24,7 +25,7 @@ const TweetPage = () => {
   //fetch tweet data from backend
   const fetchTweetData = async () => {
     try {
-      const tweetData = await axios.get(`/api/tweet/${id}`, config);
+      const tweetData = await axios.get(`${Base_URL}/api/tweet/${id}`, config);
       setTimeline([...timeline, tweetData.data]);
     } catch (error) {
       console.log(error);
@@ -35,8 +36,6 @@ const TweetPage = () => {
     fetchTweetData();
   }, []);
 
-  console.log(timeline);
-
   //if replies exists in tweet then fetch all the replies and show them aswell
 
   useEffect(() => {
@@ -44,7 +43,10 @@ const TweetPage = () => {
       if (timeline[0].Replies) {
         const fetchedReplies = await Promise.all(
           timeline[0].Replies.map(async (tweetId) => {
-            const response = await axios.get(`/api/tweet/${tweetId}`, config);
+            const response = await axios.get(
+              `${Base_URL}/api/tweet/${tweetId}`,
+              config
+            );
             return response.data;
           })
         );

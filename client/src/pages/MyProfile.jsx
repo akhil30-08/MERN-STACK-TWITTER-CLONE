@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet-async';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Base_URL from '../utils';
 
 import Sidebar from '../components/Sidebar';
 import Tweet from '../components/Tweet';
@@ -93,7 +94,7 @@ const MyProfile = () => {
     if (form.checkValidity() === true) {
       const updateUserInfo = async () => {
         const update = await axios.put(
-          `/api/user/${currentUser._id}`,
+          `${Base_URL}/api/user/${currentUser._id}`,
           { Name, Location, DateOfBirth },
           config
         );
@@ -102,7 +103,7 @@ const MyProfile = () => {
 
       //now update the current user
       const updatedCurrentUser = await axios.get(
-        `/api/user/${currentUser._id}`,
+        `${Base_URL}/api/user/${currentUser._id}`,
         config
       );
       dispatch(updateUser(updatedCurrentUser.data));
@@ -124,7 +125,7 @@ const MyProfile = () => {
       const formData = new FormData();
       formData.append('Profile_Picture', Profile_Picture);
       const submission = await axios.post(
-        `/api/user/${currentUser._id}/uploadProfilePic`,
+        `${Base_URL}/api/user/${currentUser._id}/uploadProfilePic`,
         formData,
         {
           headers: {
@@ -135,7 +136,7 @@ const MyProfile = () => {
       );
       //now update the current user
       const updatedCurrentUser = await axios.get(
-        `/api/user/${currentUser._id}`,
+        `${Base_URL}/api/user/${currentUser._id}`,
         config
       );
       dispatch(updateUser(updatedCurrentUser.data));

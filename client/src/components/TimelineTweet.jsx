@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useSelector } from 'react-redux';
 import Tweet from './Tweet';
 import LoadingSpinner from './Spinner';
+import Base_URL from '../utils';
 
 const TimelineTweet = () => {
   const [timeline, setTimeline] = useState(null);
@@ -15,7 +16,7 @@ const TimelineTweet = () => {
     const fetchData = async () => {
       try {
         setLoading(true);
-        const timelinetweets = await axios.get('/api/tweet', {
+        const timelinetweets = await axios.get(`${Base_URL}/api/tweet`, {
           headers: {
             Authorization: localStorage.getItem('token'),
           },

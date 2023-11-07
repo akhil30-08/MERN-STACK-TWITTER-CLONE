@@ -15,6 +15,7 @@ import '../css/tweetlist.css';
 import axios from 'axios';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import Base_URL from '../utils';
 
 const Homepage = () => {
   const dispatch = useDispatch();
@@ -35,7 +36,6 @@ const Homepage = () => {
   };
 
   const { currentUser } = useSelector((state) => state.user);
-  console.log(currentUser.Profile_Picture);
 
   const config = {
     headers: {
@@ -52,7 +52,7 @@ const Homepage = () => {
         formData.append('Image', Image);
       }
 
-      const submission = await axios.post(`/api/tweet`, formData, {
+      const submission = await axios.post(`${Base_URL}/api/tweet`, formData, {
         headers: {
           Authorization: localStorage.getItem('token'),
           'Content-Type': 'multipart/form-data',
@@ -60,7 +60,7 @@ const Homepage = () => {
       });
       //now update the current user
       const updatedCurrentUser = await axios.get(
-        `/api/user/${currentUser._id}`,
+        `${Base_URL}/api/user/${currentUser._id}`,
         config
       );
       dispatch(updateUser(updatedCurrentUser.data));

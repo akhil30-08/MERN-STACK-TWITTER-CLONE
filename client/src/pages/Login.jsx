@@ -5,6 +5,7 @@ import axios from 'axios';
 import { Helmet } from 'react-helmet-async';
 import { useDispatch } from 'react-redux';
 import { loginFailed, loginStart, loginSuccess } from '../redux/userSlice';
+import Base_URL from '../utils';
 
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -43,10 +44,6 @@ function Login() {
       theme: 'light',
     });
 
-  const Base_URL =
-    process.env.NODE_ENV !== 'development'
-      ? 'https://twitter-akhil-backend.onrender.com'
-      : '';
   //function to call LogIn API
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -72,8 +69,6 @@ function Login() {
       setLoading(false);
     }
   };
-
-  console.log(Base_URL);
 
   return (
     <>

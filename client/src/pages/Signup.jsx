@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { Helmet } from 'react-helmet-async';
 import LoadingSpinner from '../components/Spinner';
+import Base_URL from '../utils';
 
 //import reacttoastify
 import { ToastContainer, toast } from 'react-toastify';
@@ -50,7 +51,7 @@ function Signup() {
     setLoading(true);
 
     try {
-      const request = await axios.post('/api/auth/signup', {
+      const request = await axios.post(`${Base_URL}/api/auth/signup`, {
         Name,
         Username,
         Email,

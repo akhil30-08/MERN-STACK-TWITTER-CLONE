@@ -5,6 +5,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { Helmet } from 'react-helmet-async';
+import Base_URL from '../utils';
 
 import Sidebar from '../components/Sidebar';
 import Tweet from '../components/Tweet';
@@ -39,12 +40,11 @@ const MyProfile = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const findUser = await axios.get(`/api/user/${id}`, {
+        const findUser = await axios.get(`${Base_URL}/api/user/${id}`, {
           headers: {
             Authorization: localStorage.getItem('token'),
           },
         });
-        console.log('fetch data');
         setUser(findUser.data);
       } catch (error) {
         console.log(error);
@@ -64,14 +64,14 @@ const MyProfile = () => {
 
       if (followState == 'Follow') {
         const followUser = await axios.put(
-          `/api/user/${id}/follow`,
+          `${Base_URL}/api/user/${id}/follow`,
           {},
           config
         );
 
         //now update the current user
         const updatedCurrentUser = await axios.get(
-          `/api/user/${currentUser._id}`,
+          `${Base_URL}/api/user/${currentUser._id}`,
           config
         );
         dispatch(updateUser(updatedCurrentUser.data));
@@ -79,14 +79,14 @@ const MyProfile = () => {
         setFollowState('Following');
       } else {
         const unfollowUser = await axios.put(
-          `/api/user/${id}/unfollow`,
+          `${Base_URL}/api/user/${id}/unfollow`,
           {},
           config
         );
 
         //now update the current user
         const updatedCurrentUser = await axios.get(
-          `/api/user/${currentUser._id}`,
+          `${Base_URL}/api/user/${currentUser._id}`,
           config
         );
         dispatch(updateUser(updatedCurrentUser.data));

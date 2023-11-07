@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSelector } from 'react-redux';
 import Tweet from './Tweet';
+import Base_URL from '../utils';
 
 const MyProfileTweet = () => {
   //get the current user
@@ -13,7 +14,7 @@ const MyProfileTweet = () => {
     const fetchData = async () => {
       try {
         const timelinetweets = await axios.get(
-          `/api/tweet/tweets/user/${currentUser._id}`,
+          `${Base_URL}/api/tweet/tweets/user/${currentUser._id}`,
           {
             headers: {
               Authorization: localStorage.getItem('token'),

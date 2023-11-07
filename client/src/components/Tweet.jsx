@@ -10,6 +10,7 @@ import { format } from 'date-fns';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import LoadingSpinner from './Spinner';
+import Base_URL from '../utils';
 
 const Tweet = ({ tweet, setData }) => {
   //to deal with reply modal
@@ -94,11 +95,14 @@ const Tweet = ({ tweet, setData }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const findUser = await axios.get(`/api/user/${tweet.TweetedBy._id}`, {
-          headers: {
-            Authorization: localStorage.getItem('token'),
-          },
-        });
+        const findUser = await axios.get(
+          `${Base_URL}/api/user/${tweet.TweetedBy._id}`,
+          {
+            headers: {
+              Authorization: localStorage.getItem('token'),
+            },
+          }
+        );
 
         setUserData(findUser.data);
       } catch (error) {
@@ -117,7 +121,7 @@ const Tweet = ({ tweet, setData }) => {
       try {
         setLoading(true);
         const unlike = await axios.post(
-          `/api/tweet/${tweet._id}/dislike`,
+          `${Base_URL}/api/tweet/${tweet._id}/dislike`,
           {},
           {
             headers: {
@@ -130,25 +134,28 @@ const Tweet = ({ tweet, setData }) => {
 
         //now get the tweets again according to the page
         if (location.includes('/home')) {
-          const newData = await axios.get('/api/tweet', config);
+          const newData = await axios.get(`${Base_URL}/api/tweet`, config);
 
           setData(newData.data);
         } else if (location.includes('/my-profile')) {
           const newData = await axios.get(
-            `/api/tweet/tweets/user/${currentUser._id}`,
+            `${Base_URL}/api/tweet/tweets/user/${currentUser._id}`,
             config
           );
 
           setData(newData.data);
         } else if (location.includes('/user-profile/')) {
           const newData = await axios.get(
-            `/api/tweet/tweets/user/${tweet.TweetedBy._id}`,
+            `${Base_URL}/api/tweet/tweets/user/${tweet.TweetedBy._id}`,
             config
           );
 
           setData(newData.data);
         } else if (location.includes('/tweet')) {
-          const newData = await axios.get(`/api/tweet/${tweet._id}`, config);
+          const newData = await axios.get(
+            `${Base_URL}/api/tweet/${tweet._id}`,
+            config
+          );
 
           setData([newData.data]);
         }
@@ -161,7 +168,7 @@ const Tweet = ({ tweet, setData }) => {
       try {
         setLoading(true);
         const like = await axios.post(
-          `/api/tweet/${tweet._id}/like`,
+          `${Base_URL}/api/tweet/${tweet._id}/like`,
           {},
           {
             headers: {
@@ -174,25 +181,28 @@ const Tweet = ({ tweet, setData }) => {
 
         //now get the tweets again according to the page
         if (location.includes('/home')) {
-          const newData = await axios.get('/api/tweet', config);
+          const newData = await axios.get(`${Base_URL}/api/tweet`, config);
 
           setData(newData.data);
         } else if (location.includes('/my-profile')) {
           const newData = await axios.get(
-            `/api/tweet/tweets/user/${currentUser._id}`,
+            `${Base_URL}/api/tweet/tweets/user/${currentUser._id}`,
             config
           );
 
           setData(newData.data);
         } else if (location.includes('/user-profile/')) {
           const newData = await axios.get(
-            `/api/tweet/tweets/user/${tweet.TweetedBy._id}`,
+            `${Base_URL}/api/tweet/tweets/user/${tweet.TweetedBy._id}`,
             config
           );
 
           setData(newData.data);
         } else if (location.includes('/tweet')) {
-          const newData = await axios.get(`/api/tweet/${tweet._id}`, config);
+          const newData = await axios.get(
+            `${Base_URL}/api/tweet/${tweet._id}`,
+            config
+          );
 
           setData([newData.data]);
         }
@@ -210,24 +220,30 @@ const Tweet = ({ tweet, setData }) => {
 
     try {
       setLoading(true);
-      const deleteTweet = await axios.delete(`/api/tweet/${tweet._id}`, config);
+      const deleteTweet = await axios.delete(
+        `${Base_URL}/api/tweet/${tweet._id}`,
+        config
+      );
 
       notifyTweetDeleted();
       //now get the tweets again according to the page
 
       if (location.includes('/home')) {
-        const newData = await axios.get('/api/tweet', config);
+        const newData = await axios.get(`${Base_URL}/api/tweet`, config);
 
         setData(newData.data);
       } else if (location.includes('/my-profile')) {
         const newData = await axios.get(
-          `/api/tweet/tweets/user/${currentUser._id}`,
+          `${Base_URL}/api/tweet/tweets/user/${currentUser._id}`,
           config
         );
 
         setData(newData.data);
       } else if (location.includes('/tweet')) {
-        const newData = await axios.get(`/api/tweet/${tweet._id}`, config);
+        const newData = await axios.get(
+          `${Base_URL}/api/tweet/${tweet._id}`,
+          config
+        );
 
         setData([newData.data]);
         navigate('/home');
@@ -247,7 +263,7 @@ const Tweet = ({ tweet, setData }) => {
     try {
       if (!tweet.RetweetBy.includes(currentUser._id)) {
         const retweetTweet = await axios.post(
-          `/api/tweet/${tweet._id}/retweet`,
+          `${Base_URL}/api/tweet/${tweet._id}/retweet`,
           {},
           config
         );
@@ -255,31 +271,34 @@ const Tweet = ({ tweet, setData }) => {
 
         //now get the tweets again according to the page
         if (location.includes('/home')) {
-          const newData = await axios.get('/api/tweet', config);
+          const newData = await axios.get(`${Base_URL}/api/tweet`, config);
 
           setData(newData.data);
         } else if (location.includes('/my-profile')) {
           const newData = await axios.get(
-            `/api/tweet/tweets/user/${currentUser._id}`,
+            `${Base_URL}/api/tweet/tweets/user/${currentUser._id}`,
             config
           );
 
           setData(newData.data);
         } else if (location.includes('/user-profile/')) {
           const newData = await axios.get(
-            `/api/tweet/tweets/user/${tweet.TweetedBy._id}`,
+            `${Base_URL}/api/tweet/tweets/user/${tweet.TweetedBy._id}`,
             config
           );
 
           setData(newData.data);
         } else if (location.includes('/tweet')) {
-          const newData = await axios.get(`/api/tweet/${tweet._id}`, config);
+          const newData = await axios.get(
+            `${Base_URL}/api/tweet/${tweet._id}`,
+            config
+          );
 
           setData([newData.data]);
         }
       } else {
         const undoretweetTweet = await axios.post(
-          `/api/tweet/${tweet._id}/undort`,
+          `${Base_URL}/api/tweet/${tweet._id}/undort`,
           {},
           config
         );
@@ -287,25 +306,28 @@ const Tweet = ({ tweet, setData }) => {
         notifyTweetUndoRetweeted();
         //now get the tweets again according to the page
         if (location.includes('/home')) {
-          const newData = await axios.get('/api/tweet', config);
+          const newData = await axios.get(`${Base_URL}/api/tweet`, config);
 
           setData(newData.data);
         } else if (location.includes('/my-profile')) {
           const newData = await axios.get(
-            `/api/tweet/tweets/user/${currentUser._id}`,
+            `${Base_URL}/api/tweet/tweets/user/${currentUser._id}`,
             config
           );
 
           setData(newData.data);
         } else if (location.includes('/user-profile/')) {
           const newData = await axios.get(
-            `/api/tweet/tweets/user/${tweet.TweetedBy._id}`,
+            `${Base_URL}/api/tweet/tweets/user/${tweet.TweetedBy._id}`,
             config
           );
 
           setData(newData.data);
         } else if (location.includes('/tweet')) {
-          const newData = await axios.get(`/api/tweet/${tweet._id}`, config);
+          const newData = await axios.get(
+            `${Base_URL}/api/tweet/${tweet._id}`,
+            config
+          );
 
           setData([newData.data]);
         }
@@ -330,7 +352,10 @@ const Tweet = ({ tweet, setData }) => {
       //now get the information from server
       const getUserWhoRted = async (e) => {
         try {
-          const findUser = await axios.get(`/api/user/${userIDRT}`, config);
+          const findUser = await axios.get(
+            `${Base_URL}/api/user/${userIDRT}`,
+            config
+          );
 
           setuserRetweeted(findUser.data);
         } catch (error) {
@@ -418,7 +443,7 @@ const Tweet = ({ tweet, setData }) => {
     e.preventDefault();
     setLoading(true);
     const reply = await axios.post(
-      `/api/tweet/${tweet._id}/reply`,
+      `${Base_URL}/api/tweet/${tweet._id}/reply`,
       { Content },
       config
     );
@@ -427,25 +452,28 @@ const Tweet = ({ tweet, setData }) => {
 
     //now get the tweets again according to the page
     if (location.includes('/home')) {
-      const newData = await axios.get('/api/tweet', config);
+      const newData = await axios.get(`${Base_URL}/api/tweet`, config);
 
       setData(newData.data);
     } else if (location.includes('/my-profile')) {
       const newData = await axios.get(
-        `/api/tweet/tweets/user/${currentUser._id}`,
+        `${Base_URL}/api/tweet/tweets/user/${currentUser._id}`,
         config
       );
 
       setData(newData.data);
     } else if (location.includes('/user-profile/')) {
       const newData = await axios.get(
-        `/api/tweet/tweets/user/${tweet.TweetedBy._id}`,
+        `${Base_URL}/api/tweet/tweets/user/${tweet.TweetedBy._id}`,
         config
       );
 
       setData(newData.data);
     } else if (location.includes('/tweet')) {
-      const newData = await axios.get(`/api/tweet/${tweet._id}`, config);
+      const newData = await axios.get(
+        `${Base_URL}/api/tweet/${tweet._id}`,
+        config
+      );
 
       setData([newData.data]);
     }
