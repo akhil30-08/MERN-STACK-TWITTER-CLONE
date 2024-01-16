@@ -7,7 +7,7 @@ export default defineConfig({
   server: process.env.NODE_ENV == 'development' && {
     proxy: {
       '/api': {
-        target: 'https://twitter-akhil-backend.onrender.com',
+        target: 'https://ill-gold-hare.cyclic.app',
         changeOrigin: true,
       },
     },
