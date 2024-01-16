@@ -156,6 +156,7 @@ router.post(
       }
 
       //upload Image
+      console.log(req.file);
       const upload = await uploadImage(req.file.path);
 
       const user = await UserModel.findById(req.params.id);
