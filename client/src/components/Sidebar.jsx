@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink, useNavigate, useLocation } from 'react-router-dom';
 import '../css/sidebar.css';
 import { logout } from '../redux/userSlice';
 import { toast } from 'react-toastify';
@@ -18,6 +18,7 @@ const Sidebar = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { pathname } = useLocation();
 
   //const notify on logging out
   const notify = () =>
@@ -48,10 +49,8 @@ const Sidebar = () => {
         'https://1fid.com/wp-content/uploads/2022/06/no-profile-picture-4-1024x1024.jpg'
       )
     ) {
-      const picture = await axios.get(`/files/${currentUser.Profile_Picture}`, {
-        responseType: 'blob',
-      });
-      setPictureToShow(URL.createObjectURL(picture.data));
+      const picture = `https://res.cloudinary.com/dbjfwfix8/image/upload/v1696357712/${currentUser.Profile_Picture}.jpg`;
+      setPictureToShow(picture);
     }
   };
 
@@ -61,13 +60,13 @@ const Sidebar = () => {
 
   return (
     <>
-      <Navbar expand='lg'>
+      <Navbar expand='md' className='d-none d-md-block'>
         <Container>
           <Navbar.Toggle aria-controls='basic-navbar-nav' />
           <Navbar.Collapse id='basic-navbar-nav'>
             <Nav
               style={{ height: '100vh' }}
-              className='me-auto d-flex flex-column justify-content-between navbarr'
+              className='me-auto d-flex flex-column justify-content-between navbarr align-items-center'
             >
               {/* div containing buttons */}
               <div className='d-flex flex-column nav-section'>
@@ -113,7 +112,7 @@ const Sidebar = () => {
               </div>
 
               {/* div containing info */}
-              <div className='mb-3 d-flex username-info'>
+              <div className='mb-3 d-flex username-info w-75 justify-content-center'>
                 <NavLink to='/my-profile' className='text-decoration-none '>
                   {!PictureToShow ? (
                     <img

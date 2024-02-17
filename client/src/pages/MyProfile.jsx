@@ -1,4 +1,3 @@
-import React from 'react';
 import { useEffect, useState } from 'react';
 import '../css/tweetlist.css';
 import { Helmet } from 'react-helmet-async';
@@ -8,7 +7,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import Base_URL from '../utils';
 
 import Sidebar from '../components/Sidebar';
-import Tweet from '../components/Tweet';
 import Modal from 'react-bootstrap/Modal';
 import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
@@ -21,6 +19,7 @@ import MyProfileTweet from '../components/MyProfileTweet';
 import axios from 'axios';
 import { updateUser } from '../redux/userSlice';
 import '../css/myprofile.css';
+import OffCanvas from '../components/Offcanvas';
 
 const MyProfile = () => {
   const dispatch = useDispatch();
@@ -172,16 +171,17 @@ const MyProfile = () => {
       </Helmet>
 
       <div className='row'>
-        <div className='col-md-3 '>
+        <div className='col-md-3 d-none d-md-block'>
           <div className='side-bar-row d-flex flex-column align-items-center justify-content-between  '>
             <Sidebar />
           </div>
         </div>
 
-        <div className='col-md-6 second-column'>
-          <div className='row my-2'>
-            <div className='col-12 d-flex justify-content-between'>
-              <h5 className='ms-1'>Profile</h5>
+        <div className='col-sm-12 col-md-6 second-column'>
+          <div className='row my-2 sticky-top bg-white mx-1 py-1'>
+            <div className='col-12 d-flex'>
+              <OffCanvas />
+              <h5 className='ms-1 align-self-baseline'>Profile</h5>
             </div>
           </div>
 
@@ -194,7 +194,7 @@ const MyProfile = () => {
 
                 {/* information-box */}
                 <div className='row profile-icon-row'>
-                  <div className='col-5'>
+                  <div className='col-4'>
                     <span className='ms-3'>
                       {PictureToShow ? (
                         <img
@@ -212,7 +212,7 @@ const MyProfile = () => {
                     </span>
                   </div>
 
-                  <div className='col-7 '>
+                  <div className='col-8 '>
                     <button
                       type='submit'
                       className='btn btn-outline-primary ms-5 mt-2'
@@ -242,10 +242,7 @@ const MyProfile = () => {
                         <i className='fa-solid fa-cake-candles me-2'></i>
                         <span className='me-2'>DOB</span>
                         <span>
-                          {format(
-                            new Date(currentUser.DateOfBirth),
-                            'EE MMM dd yyyy'
-                          )}
+                          {format(new Date(currentUser.DateOfBirth), 'EE MMM dd yyyy')}
                         </span>
                       </span>
                     )}
@@ -265,10 +262,7 @@ const MyProfile = () => {
                       <i className='fa-solid fa-calendar me-2'></i>
                       <span className='me-2'>Joined</span>
                       <span>
-                        {format(
-                          new Date(currentUser.createdAt),
-                          'EE MMM dd yyyy'
-                        )}
+                        {format(new Date(currentUser.createdAt), 'EE MMM dd yyyy')}
                       </span>
                     </div>
 
@@ -295,7 +289,7 @@ const MyProfile = () => {
           </div>
         </div>
 
-        <div className='col-md-3'></div>
+        <div className='col-md-3 d-none d-md-block'></div>
       </div>
 
       {/* for showing modal component of edit profile */}

@@ -50,11 +50,8 @@ const Tweet = ({ tweet, setData }) => {
         'https://1fid.com/wp-content/uploads/2022/06/no-profile-picture-4-1024x1024.jpg'
       )
     ) {
-      const picture = await axios.get(`/files/${userData.Profile_Picture}`, {
-        responseType: 'blob',
-      });
-
-      setPictureToShow(URL.createObjectURL(picture.data));
+      const picture = `https://res.cloudinary.com/dbjfwfix8/image/upload/v1696357712/${currentUser.Profile_Picture}.jpg`;
+      setPictureToShow(picture);
     }
   };
   useEffect(() => {
@@ -69,11 +66,8 @@ const Tweet = ({ tweet, setData }) => {
 
   const getTweetImage = async () => {
     if (tweet.Image) {
-      const picture = await axios.get(`/tweetpictures/${tweet.Image}`, {
-        responseType: 'blob',
-      });
-
-      setTweetImage(URL.createObjectURL(picture.data));
+      const picture = `https://res.cloudinary.com/dbjfwfix8/image/upload/v1696357712/${tweet.Image}.jpg`;
+      setTweetImage(picture);
     }
   };
 
@@ -95,14 +89,11 @@ const Tweet = ({ tweet, setData }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const findUser = await axios.get(
-          `${Base_URL}/api/user/${tweet.TweetedBy._id}`,
-          {
-            headers: {
-              Authorization: localStorage.getItem('token'),
-            },
-          }
-        );
+        const findUser = await axios.get(`${Base_URL}/api/user/${tweet.TweetedBy._id}`, {
+          headers: {
+            Authorization: localStorage.getItem('token'),
+          },
+        });
 
         setUserData(findUser.data);
       } catch (error) {
@@ -152,10 +143,7 @@ const Tweet = ({ tweet, setData }) => {
 
           setData(newData.data);
         } else if (location.includes('/tweet')) {
-          const newData = await axios.get(
-            `${Base_URL}/api/tweet/${tweet._id}`,
-            config
-          );
+          const newData = await axios.get(`${Base_URL}/api/tweet/${tweet._id}`, config);
 
           setData([newData.data]);
         }
@@ -199,10 +187,7 @@ const Tweet = ({ tweet, setData }) => {
 
           setData(newData.data);
         } else if (location.includes('/tweet')) {
-          const newData = await axios.get(
-            `${Base_URL}/api/tweet/${tweet._id}`,
-            config
-          );
+          const newData = await axios.get(`${Base_URL}/api/tweet/${tweet._id}`, config);
 
           setData([newData.data]);
         }
@@ -215,7 +200,6 @@ const Tweet = ({ tweet, setData }) => {
   };
 
   const handleDeleteTweet = async (e) => {
-    e.preventDefault();
     handleCloseDelete();
 
     try {
@@ -240,10 +224,7 @@ const Tweet = ({ tweet, setData }) => {
 
         setData(newData.data);
       } else if (location.includes('/tweet')) {
-        const newData = await axios.get(
-          `${Base_URL}/api/tweet/${tweet._id}`,
-          config
-        );
+        const newData = await axios.get(`${Base_URL}/api/tweet/${tweet._id}`, config);
 
         setData([newData.data]);
         navigate('/home');
@@ -289,10 +270,7 @@ const Tweet = ({ tweet, setData }) => {
 
           setData(newData.data);
         } else if (location.includes('/tweet')) {
-          const newData = await axios.get(
-            `${Base_URL}/api/tweet/${tweet._id}`,
-            config
-          );
+          const newData = await axios.get(`${Base_URL}/api/tweet/${tweet._id}`, config);
 
           setData([newData.data]);
         }
@@ -324,10 +302,7 @@ const Tweet = ({ tweet, setData }) => {
 
           setData(newData.data);
         } else if (location.includes('/tweet')) {
-          const newData = await axios.get(
-            `${Base_URL}/api/tweet/${tweet._id}`,
-            config
-          );
+          const newData = await axios.get(`${Base_URL}/api/tweet/${tweet._id}`, config);
 
           setData([newData.data]);
         }
@@ -352,10 +327,7 @@ const Tweet = ({ tweet, setData }) => {
       //now get the information from server
       const getUserWhoRted = async (e) => {
         try {
-          const findUser = await axios.get(
-            `${Base_URL}/api/user/${userIDRT}`,
-            config
-          );
+          const findUser = await axios.get(`${Base_URL}/api/user/${userIDRT}`, config);
 
           setuserRetweeted(findUser.data);
         } catch (error) {
@@ -470,10 +442,7 @@ const Tweet = ({ tweet, setData }) => {
 
       setData(newData.data);
     } else if (location.includes('/tweet')) {
-      const newData = await axios.get(
-        `${Base_URL}/api/tweet/${tweet._id}`,
-        config
-      );
+      const newData = await axios.get(`${Base_URL}/api/tweet/${tweet._id}`, config);
 
       setData([newData.data]);
     }
@@ -485,11 +454,7 @@ const Tweet = ({ tweet, setData }) => {
       {loading && <LoadingSpinner />}
       {userData && (
         <>
-          <Link
-            to={`/tweet/${tweet._id}`}
-            className='text-decoration-none'
-            as='div'
-          >
+          <Link to={`/tweet/${tweet._id}`} className='text-decoration-none' as='div'>
             <>
               <div className='card tweet-card'>
                 <div className='card-body'>
@@ -498,10 +463,7 @@ const Tweet = ({ tweet, setData }) => {
                   {tweet.RetweetBy.length > 0 && userRetweeted && (
                     <div className='row'>
                       <div className='col-12'>
-                        <span
-                          className='text-muted'
-                          style={{ marginInline: '25%' }}
-                        >
+                        <span className='text-muted' style={{ marginInline: '25%' }}>
                           <span>
                             <i className='fa-solid fa-retweet text-muted'></i>
                           </span>{' '}
@@ -540,10 +502,7 @@ const Tweet = ({ tweet, setData }) => {
                           </span>
                         ) : (
                           <span>
-                            <NavLink
-                              to='/my-profile'
-                              className='username-mentioned'
-                            >
+                            <NavLink to='/my-profile' className='username-mentioned'>
                               <span>@{userData.Username}</span>
                             </NavLink>
                           </span>
@@ -619,10 +578,7 @@ const Tweet = ({ tweet, setData }) => {
                           <i className='fa-regular fa-comment'></i>
                           <span className='ms-1'>{tweet.Replies.length}</span>
                         </span>
-                        <span
-                          className='mx-3 retweet-button'
-                          onClick={handleRetweet}
-                        >
+                        <span className='mx-3 retweet-button' onClick={handleRetweet}>
                           {tweet.RetweetBy.includes(currentUser._id) ? (
                             <i className='fa-solid fa-retweet'></i>
                           ) : (
@@ -670,12 +626,7 @@ const Tweet = ({ tweet, setData }) => {
           </Modal>
 
           {/* delete tweet modal */}
-          <Modal
-            show={showDelete}
-            onHide={handleCloseDelete}
-            animation={false}
-            size='sm'
-          >
+          <Modal show={showDelete} onHide={handleCloseDelete} animation={false} size='sm'>
             <Modal.Body>
               <strong>Are you sure you want to delete the tweet?</strong>
             </Modal.Body>
@@ -683,7 +634,13 @@ const Tweet = ({ tweet, setData }) => {
               <Button variant='secondary' onClick={handleCloseDelete}>
                 No
               </Button>
-              <Button variant='danger' onClick={handleDeleteTweet}>
+              <Button
+                variant='danger'
+                onClick={() => {
+                  handleDeleteTweet();
+                  location.includes('tweet') && navigate(-1);
+                }}
+              >
                 Yes
               </Button>
             </Modal.Footer>

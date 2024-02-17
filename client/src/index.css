@@ -3,3 +3,8 @@
   box-sizing: border-box;
   scroll-behavior: smooth;
 }
+
+.activelink {
+  background-color: rgb(160, 212, 228);
+  color: black;
+}
