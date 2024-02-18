@@ -107,7 +107,7 @@ const Homepage = () => {
                   <h5 className='ms-1'>Home</h5>
                   <button
                     type='submit'
-                    className='btn btn-primary homepage-tweet-btn'
+                    className='btn btn-primary homepage-tweet-btn me-2'
                     onClick={handleShow}
                   >
                     Tweet

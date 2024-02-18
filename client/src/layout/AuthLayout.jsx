@@ -5,8 +5,8 @@ const AuthLayout = () => {
   const { pathname } = useLocation();
 
   return (
-    <section>
-      <div className='card mx-auto mt-2 ' style={{ width: '75vw', height: '27rem' }}>
+    <section className='d-flex justify-content-center align-items-center vh-100'>
+      <div className='card mx-auto mt-2' style={{ width: '75vw' }}>
         <div className='card-body'>
           <div className='row' style={{ height: '100%' }}>
             <div

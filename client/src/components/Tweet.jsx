@@ -50,7 +50,7 @@ const Tweet = ({ tweet, setData }) => {
         'https://1fid.com/wp-content/uploads/2022/06/no-profile-picture-4-1024x1024.jpg'
       )
     ) {
-      const picture = `https://res.cloudinary.com/dbjfwfix8/image/upload/v1696357712/${currentUser.Profile_Picture}.jpg`;
+      const picture = `https://res.cloudinary.com/dbjfwfix8/image/upload/v1696357712/${userData.Profile_Picture}.jpg`;
       setPictureToShow(picture);
     }
   };
@@ -102,7 +102,7 @@ const Tweet = ({ tweet, setData }) => {
     };
 
     fetchData();
-  }, [tweet.TweetedBy._id, tweet.Replies, tweet.RetweetBy]);
+  }, [tweet.TweetedBy._id, tweet.Replies, tweet.RetweetBy, tweet.Image]);
 
   const handleLikeUnlike = async (e) => {
     e.preventDefault();
@@ -454,83 +454,86 @@ const Tweet = ({ tweet, setData }) => {
       {loading && <LoadingSpinner />}
       {userData && (
         <>
-          <Link to={`/tweet/${tweet._id}`} className='text-decoration-none ' as='div'>
-            <>
-              <div className='card tweet-card p-1'>
-                <div className='card-body'>
-                  {/* for showing who has retweeted the tweet */}
+          <>
+            <div className='card tweet-card p-1'>
+              <div className='card-body'>
+                {/* for showing who has retweeted the tweet */}
 
-                  {tweet.RetweetBy.length > 0 && userRetweeted && (
-                    <div className='row'>
-                      <div className='col-12'>
-                        <span className='text-muted d-flex justify-content-center'>
-                          <span>
-                            <i className='fa-solid fa-retweet text-muted'></i>
-                          </span>{' '}
-                          {`Retweeted by ${userRetweeted.Name}`}
-                        </span>
-                      </div>
-                    </div>
-                  )}
-
-                  {/* for displaying username */}
-                  <div className='row mt-2'>
+                {tweet.RetweetBy.length > 0 && userRetweeted && (
+                  <div className='row'>
                     <div className='col-12'>
-                      <span className='ms-1'>
-                        {PictureToShow ? (
-                          <img
-                            src={PictureToShow}
-                            className='img-fluid tweet-profile-pic '
-                          />
-                        ) : (
-                          <img
-                            src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR82DN9JU-hbIhhkPR-AX8KiYzA4fBMVwjLAG82fz7GLg&s'
-                            className='img-fluid tweet-profile-pic '
-                          />
-                        )}
-                      </span>
-
-                      <span className='ms-2'>
-                        {tweet.TweetedBy._id !== currentUser._id ? (
-                          <span>
-                            <NavLink
-                              to={`/user-profile/${tweet.TweetedBy._id}`}
-                              className='username-mentioned'
-                            >
-                              <span>@{userData.Username}</span>
-                            </NavLink>
-                          </span>
-                        ) : (
-                          <span>
-                            <NavLink to='/my-profile' className='username-mentioned'>
-                              <span>@{userData.Username}</span>
-                            </NavLink>
-                          </span>
-                        )}
-                      </span>
-                      <span className='ms-2'>
-                        -
-                        <span className='text-muted ms-1'>
-                          {format(new Date(tweet.createdAt), 'EE MMM dd yyyy')}
-                        </span>
-                      </span>
-                      {/* for deleting the tweet */}
-                      {tweet.TweetedBy._id == currentUser._id && (
+                      <span className='text-muted d-flex justify-content-center'>
                         <span>
-                          <button
-                            className='btn btn-light float-end me-2'
-                            onClick={handleShowDelete}
-                          >
-                            <i
-                              className='fa-solid fa-trash-can'
-                              onClick={handleShowDelete}
-                            />
-                          </button>
-                        </span>
-                      )}
+                          <i className='fa-solid fa-retweet text-muted'></i>
+                        </span>{' '}
+                        {`Retweeted by ${userRetweeted.Name}`}
+                      </span>
                     </div>
                   </div>
+                )}
 
+                {/* for displaying username */}
+                <div className='row mt-2'>
+                  <div className='col-12'>
+                    <span className='ms-1'>
+                      {PictureToShow ? (
+                        <img
+                          src={PictureToShow}
+                          className='img-fluid tweet-profile-pic '
+                        />
+                      ) : (
+                        <img
+                          src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR82DN9JU-hbIhhkPR-AX8KiYzA4fBMVwjLAG82fz7GLg&s'
+                          className='img-fluid tweet-profile-pic '
+                        />
+                      )}
+                    </span>
+
+                    <span className='ms-2'>
+                      {tweet.TweetedBy._id !== currentUser._id ? (
+                        <span>
+                          <Link
+                            to={`/user-profile/${tweet.TweetedBy._id}`}
+                            className='username-mentioned'
+                          >
+                            <span>@{userData.Username}</span>
+                          </Link>
+                        </span>
+                      ) : (
+                        <span>
+                          <Link to='/my-profile' className='username-mentioned'>
+                            <span>@{userData.Username}</span>
+                          </Link>
+                        </span>
+                      )}
+                    </span>
+                    <span className='ms-2'>
+                      -
+                      <span className='text-muted ms-1'>
+                        {format(new Date(tweet.createdAt), 'EE MMM dd yyyy')}
+                      </span>
+                    </span>
+                    {/* for deleting the tweet */}
+                    {tweet.TweetedBy._id == currentUser._id && (
+                      <span>
+                        <button
+                          className='btn btn-light float-end me-2'
+                          onClick={handleShowDelete}
+                        >
+                          <i
+                            className='fa-solid fa-trash-can'
+                            onClick={handleShowDelete}
+                          />
+                        </button>
+                      </span>
+                    )}
+                  </div>
+                </div>
+
+                <Link
+                  to={`/tweet/${tweet._id}`}
+                  className='text-decoration-none text-black'
+                >
                   {/* for showing tweetcontent */}
                   <div className='row p-0'>
                     <div className='col-12 d-flex justify-content-start p-0 align-items-end'>
@@ -546,49 +549,49 @@ const Tweet = ({ tweet, setData }) => {
                       </div>
                     </div>
                   )}
+                </Link>
 
-                  {/* for like,rt buttons */}
-                  <div className='row'>
-                    <div className='col-12'>
-                      <div className='ms-5'>
-                        <span
-                          className='mx-3 like-button'
-                          style={{ cursor: 'pointer' }}
-                          onClick={handleLikeUnlike}
-                        >
-                          {tweet.Likes.includes(currentUser._id) ? (
-                            <i className='fa-solid fa-heart'></i>
-                          ) : (
-                            <i className='fa-regular fa-heart'></i>
-                          )}
-                          <span className='ms-1'>{tweet.Likes.length}</span>
-                        </span>
+                {/* for like,rt buttons */}
+                <div className='row'>
+                  <div className='col-12'>
+                    <div className='ms-5'>
+                      <span
+                        className='mx-3 like-button'
+                        style={{ cursor: 'pointer' }}
+                        onClick={handleLikeUnlike}
+                      >
+                        {tweet.Likes.includes(currentUser._id) ? (
+                          <i className='fa-solid fa-heart'></i>
+                        ) : (
+                          <i className='fa-regular fa-heart'></i>
+                        )}
+                        <span className='ms-1'>{tweet.Likes.length}</span>
+                      </span>
 
-                        <span
-                          className='mx-3 comment-button'
-                          onClick={(e) => {
-                            e.preventDefault();
-                            handleShow();
-                          }}
-                        >
-                          <i className='fa-regular fa-comment'></i>
-                          <span className='ms-1'>{tweet.Replies.length}</span>
-                        </span>
-                        <span className='mx-3 retweet-button' onClick={handleRetweet}>
-                          {tweet.RetweetBy.includes(currentUser._id) ? (
-                            <i className='fa-solid fa-retweet'></i>
-                          ) : (
-                            <i className='fa-solid fa-retweet text-muted'></i>
-                          )}
-                          <span className='ms-1'>{tweet.RetweetBy.length}</span>
-                        </span>
-                      </div>
+                      <span
+                        className='mx-3 comment-button'
+                        onClick={(e) => {
+                          e.preventDefault();
+                          handleShow();
+                        }}
+                      >
+                        <i className='fa-regular fa-comment'></i>
+                        <span className='ms-1'>{tweet.Replies.length}</span>
+                      </span>
+                      <span className='mx-3 retweet-button' onClick={handleRetweet}>
+                        {tweet.RetweetBy.includes(currentUser._id) ? (
+                          <i className='fa-solid fa-retweet'></i>
+                        ) : (
+                          <i className='fa-solid fa-retweet text-muted'></i>
+                        )}
+                        <span className='ms-1'>{tweet.RetweetBy.length}</span>
+                      </span>
                     </div>
                   </div>
                 </div>
               </div>
-            </>
-          </Link>
+            </div>
+          </>
 
           {/* Reply Modal */}
           <Modal show={show} onHide={handleClose}>

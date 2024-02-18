@@ -212,17 +212,17 @@ const MyProfile = () => {
                     </span>
                   </div>
 
-                  <div className='col-8 '>
+                  <div className='col-8 d-flex justify-content-end gap-2 h-75 '>
                     <button
                       type='submit'
-                      className='btn btn-outline-primary ms-5 mt-2 float-end'
+                      className='btn btn-outline-primary mt-2 modal-button btn-sm'
                       onClick={handleShowUpload}
                     >
                       Upload Profile Picture
                     </button>
                     <button
                       type='submit'
-                      className='btn btn-outline-secondary me-3 mt-2 float-end'
+                      className='btn btn-outline-secondary mt-2 modal-button btn-sm'
                       onClick={handleShowEdit}
                     >
                       Edit
@@ -364,9 +364,7 @@ const MyProfile = () => {
           <Modal.Title>Upload Profile Picture</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Alert variant='primary' style={{ height: '3.2rem' }}>
-            Note: The image should be square in shape
-          </Alert>
+          <Alert variant='primary'>Note: The image should be square in shape</Alert>
           <Form id='UploadProfilePic' onSubmit={handleUploadImageSubmit}>
             <Form.Control type='file' onChange={handleImageChange} />
           </Form>

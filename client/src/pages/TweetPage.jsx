@@ -35,18 +35,14 @@ const TweetPage = () => {
   useEffect(() => {
     fetchTweetData();
   }, []);
-
   //if replies exists in tweet then fetch all the replies and show them aswell
 
   useEffect(() => {
     const fetchReplies = async () => {
-      if (timeline[0].Replies) {
+      if (timeline.length > 0 && timeline[0].Replies && timeline[0].Replies?.length > 0) {
         const fetchedReplies = await Promise.all(
-          timeline[0].Replies.map(async (tweetId) => {
-            const response = await axios.get(
-              `${Base_URL}/api/tweet/${tweetId}`,
-              config
-            );
+          timeline[0].Replies?.map(async (tweetId) => {
+            const response = await axios.get(`${Base_URL}/api/tweet/${tweetId}`, config);
             return response.data;
           })
         );
@@ -80,13 +76,7 @@ const TweetPage = () => {
             <div className='col-12'>
               {timeline.length > 0 &&
                 timeline.map((tweet) => {
-                  return (
-                    <Tweet
-                      key={tweet._id}
-                      tweet={tweet}
-                      setData={setTimeline}
-                    />
-                  );
+                  return <Tweet key={tweet._id} tweet={tweet} setData={setTimeline} />;
                 })}
             </div>
           </div>
@@ -96,9 +86,7 @@ const TweetPage = () => {
               <h6 className='mb-2'>Replies</h6>
               {replies.length > 0 ? (
                 replies.map((tweet) => {
-                  return (
-                    <Tweet key={tweet._id} tweet={tweet} setData={setReplies} />
-                  );
+                  return <Tweet key={tweet._id} tweet={tweet} setData={setReplies} />;
                 })
               ) : (
                 <p>No replies found.</p>

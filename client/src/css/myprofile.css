@@ -30,4 +30,8 @@
     top: 1px;
     z-index: 50; /* Override the sticky behavior */
   }
+
+  .modal-button {
+    font-size: 12px;
+  }
 }

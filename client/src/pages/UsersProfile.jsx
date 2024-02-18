@@ -125,12 +125,14 @@ const MyProfile = () => {
   const [PictureToShow, setPictureToShow] = useState(null);
   //now get the profile picture of the current user
   const getProfilePicture = async () => {
-    if (user && user.Profile_Picture) {
-      const picture = await axios.get(`/files/${user.Profile_Picture}`, {
-        responseType: 'blob',
-      });
-      console.log('ok');
-      setPictureToShow(URL.createObjectURL(picture.data));
+    if (
+      user &&
+      !user.Profile_Picture.includes(
+        'https://1fid.com/wp-content/uploads/2022/06/no-profile-picture-4-1024x1024.jpg'
+      )
+    ) {
+      const picture = `https://res.cloudinary.com/dbjfwfix8/image/upload/v1696357712/${user.Profile_Picture}.jpg`;
+      setPictureToShow(picture);
     }
   };
 
@@ -210,10 +212,7 @@ const MyProfile = () => {
                             <i className='fa-solid fa-cake-candles me-2'></i>
                             <span className='me-2'>DOB</span>
                             <span>
-                              {format(
-                                new Date(user.DateOfBirth),
-                                'EE MMM dd yyyy'
-                              )}
+                              {format(new Date(user.DateOfBirth), 'EE MMM dd yyyy')}
                             </span>
                           </span>
                         )}
