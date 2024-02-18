@@ -454,16 +454,16 @@ const Tweet = ({ tweet, setData }) => {
       {loading && <LoadingSpinner />}
       {userData && (
         <>
-          <Link to={`/tweet/${tweet._id}`} className='text-decoration-none' as='div'>
+          <Link to={`/tweet/${tweet._id}`} className='text-decoration-none ' as='div'>
             <>
-              <div className='card tweet-card'>
+              <div className='card tweet-card p-1'>
                 <div className='card-body'>
                   {/* for showing who has retweeted the tweet */}
 
                   {tweet.RetweetBy.length > 0 && userRetweeted && (
                     <div className='row'>
                       <div className='col-12'>
-                        <span className='text-muted' style={{ marginInline: '25%' }}>
+                        <span className='text-muted d-flex justify-content-center'>
                           <span>
                             <i className='fa-solid fa-retweet text-muted'></i>
                           </span>{' '}
@@ -532,8 +532,8 @@ const Tweet = ({ tweet, setData }) => {
                   </div>
 
                   {/* for showing tweetcontent */}
-                  <div className='row'>
-                    <div className='col-12'>
+                  <div className='row p-0'>
+                    <div className='col-12 d-flex justify-content-start p-0 align-items-end'>
                       <p className='tweet-content'>{tweet.Content}</p>
                     </div>
                   </div>
@@ -542,11 +542,7 @@ const Tweet = ({ tweet, setData }) => {
                   {TweetImage && (
                     <div className='row mb-3'>
                       <div className='col-12 d-flex justify-content-center'>
-                        <img
-                          src={TweetImage}
-                          className='img-fluid'
-                          style={{ maxWidth: '27rem', maxHeight: '30rem' }}
-                        />
+                        <img src={TweetImage} className='img-fluid p-2' />
                       </div>
                     </div>
                   )}

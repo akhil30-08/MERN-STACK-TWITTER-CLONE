@@ -23,3 +23,11 @@
 .profile-button {
   background-color: rgb(160, 212, 228);
 }
+
+@media only screen and (max-width: 600px) {
+  .sticky-top-sm {
+    position: sticky;
+    top: 1px;
+    z-index: 50; /* Override the sticky behavior */
+  }
+}

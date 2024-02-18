@@ -8,15 +8,17 @@ import TweetPage from './pages/TweetPage.jsx';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import UsersProfile from './pages/UsersProfile.jsx';
-import Spinner from './components/Spinner.jsx';
 import './index.css';
+import AuthLayout from './layout/AuthLayout.jsx';
 
 function App() {
   return (
     <>
       <Routes>
-        <Route exact path='/' element={<Login />} />
-        <Route exact path='/signup' element={<Signup />} />
+        <Route element={<AuthLayout />}>
+          <Route exact path='/' element={<Login />} />
+          <Route exact path='/signup' element={<Signup />} />
+        </Route>
         <Route exact path='/home' element={<Homepage />} />
         <Route exact path='/my-profile' element={<MyProfile />} />
         <Route exact path='/user-profile/:id' element={<UsersProfile />} />

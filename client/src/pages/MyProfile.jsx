@@ -178,7 +178,7 @@ const MyProfile = () => {
         </div>
 
         <div className='col-sm-12 col-md-6 second-column'>
-          <div className='row my-2 sticky-top bg-white mx-1 py-1'>
+          <div className='row sticky-top-sm bg-white'>
             <div className='col-12 d-flex'>
               <OffCanvas />
               <h5 className='ms-1 align-self-baseline'>Profile</h5>
@@ -215,14 +215,14 @@ const MyProfile = () => {
                   <div className='col-8 '>
                     <button
                       type='submit'
-                      className='btn btn-outline-primary ms-5 mt-2'
+                      className='btn btn-outline-primary ms-5 mt-2 float-end'
                       onClick={handleShowUpload}
                     >
                       Upload Profile Picture
                     </button>
                     <button
                       type='submit'
-                      className='btn btn-outline-secondary ms-2 mt-2'
+                      className='btn btn-outline-secondary me-3 mt-2 float-end'
                       onClick={handleShowEdit}
                     >
                       Edit

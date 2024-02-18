@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import '../css/login.css';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
@@ -7,7 +7,7 @@ import LoadingSpinner from '../components/Spinner';
 import Base_URL from '../utils';
 
 //import reacttoastify
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
 function Signup() {
@@ -72,75 +72,53 @@ function Signup() {
         <title>Signup</title>
       </Helmet>
 
-      <section className='mt-5'>
-        <div
-          className='card mx-auto mt-2 '
-          style={{ width: '75vw', height: '27rem' }}
-        >
-          <div className='card-body'>
-            <div className='row' style={{ height: '100%' }}>
-              <div
-                className='col-md-5 d-flex flex-column justify-content-center align-items-center'
-                id='left-box-login'
-              >
-                <h4>Join Us </h4>
-                <div className='mt-2'>
-                  <i className='fa-brands fa-twitter fs-1'></i>
-                </div>
+      <div>
+        <h4 className='mt-3 ms-4'>Register</h4>
+        <form className='mt-2 px-4' onSubmit={handleSubmit}>
+          <input
+            type='text'
+            className='form-control mt-3'
+            placeholder='Full Name'
+            value={Name}
+            onChange={(e) => setName(e.target.value)}
+            autoComplete='current-password'
+          ></input>
+          <input
+            type='email'
+            className='form-control mt-3'
+            id='exampleFormControlInput1'
+            placeholder='Email'
+            value={Email}
+            onChange={(e) => setEmail(e.target.value)}
+          ></input>
+          <input
+            type='text'
+            className='form-control mt-3'
+            placeholder='Username'
+            value={Username}
+            onChange={(e) => setUsername(e.target.value)}
+          ></input>
+          <input
+            type='password'
+            className='form-control mt-3'
+            id='exampleInputPassword1'
+            placeholder='Password'
+            value={Password}
+            onChange={(e) => setPassword(e.target.value)}
+          ></input>
+          <button type='submit' className='mt-3 px-3 btn btn-dark'>
+            Register
+          </button>
 
-                <i className='fa-solid fa-messages' />
-              </div>
-              <div className='col-md-7'>
-                <h4 className='mt-5 ms-4'>Register</h4>
-                <form className='mt-2 px-4' onSubmit={handleSubmit}>
-                  <input
-                    type='text'
-                    className='form-control mt-3'
-                    placeholder='Full Name'
-                    value={Name}
-                    onChange={(e) => setName(e.target.value)}
-                    autoComplete='current-password'
-                  ></input>
-                  <input
-                    type='email'
-                    className='form-control mt-3'
-                    id='exampleFormControlInput1'
-                    placeholder='Email'
-                    value={Email}
-                    onChange={(e) => setEmail(e.target.value)}
-                  ></input>
-                  <input
-                    type='text'
-                    className='form-control mt-3'
-                    placeholder='Username'
-                    value={Username}
-                    onChange={(e) => setUsername(e.target.value)}
-                  ></input>
-                  <input
-                    type='password'
-                    className='form-control mt-3'
-                    id='exampleInputPassword1'
-                    placeholder='Password'
-                    value={Password}
-                    onChange={(e) => setPassword(e.target.value)}
-                  ></input>
-                  <button type='submit' className='mt-3 px-3 btn btn-dark'>
-                    Register
-                  </button>
-
-                  {loading && <LoadingSpinner />}
-                </form>
-                <p className='mt-4 ms-4 '>
-                  <span className='text-muted'>Already Registered?</span>{' '}
-                  <Link to='/' className='text-primary'>
-                    LogIn Here
-                  </Link>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+          {loading && <LoadingSpinner />}
+        </form>
+        <p className='mt-4 ms-4 '>
+          <span className='text-muted'>Already Registered?</span>{' '}
+          <Link to='/' className='text-primary'>
+            LogIn Here
+          </Link>
+        </p>
+      </div>
     </>
   );
 }

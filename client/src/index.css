@@ -2,9 +2,10 @@
   margin: 0;
   box-sizing: border-box;
   scroll-behavior: smooth;
+  padding: 0;
 }
 
-.activelink {
-  background-color: rgb(160, 212, 228);
+.activeLink {
+  background-color: rgb(160, 212, 228) !important;
   color: black;
 }
