@@ -7,7 +7,7 @@ import { useParams } from 'react-router-dom';
 const UserProfileTweet = () => {
   let { id } = useParams();
 
-  const [timeline, setTimeline] = useState(null);
+  const [timeline, setTimeline] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
