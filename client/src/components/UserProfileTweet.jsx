@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useSelector } from 'react-redux';
 import Tweet from './Tweet';
 import { useParams } from 'react-router-dom';
 
@@ -17,7 +16,6 @@ const UserProfileTweet = () => {
             Authorization: localStorage.getItem('token'),
           },
         });
-
         setTimeline(timelinetweets.data);
       } catch (error) {
         console.log(error);
@@ -29,8 +27,12 @@ const UserProfileTweet = () => {
 
   return (
     <>
+      {timeline && timeline.length > 0
+        ? console.log('map is about to start')
+        : console.log('error')}
       {timeline && timeline.length > 0 ? (
         timeline.map((tweet) => {
+          console.log('map started');
           return <Tweet key={tweet._id} tweet={tweet} setData={setTimeline} />;
         })
       ) : (
