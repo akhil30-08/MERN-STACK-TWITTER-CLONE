@@ -89,13 +89,17 @@ const Tweet = ({ tweet, setData }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const findUser = await axios.get(`${Base_URL}/api/user/${tweet.TweetedBy._id}`, {
-          headers: {
-            Authorization: localStorage.getItem('token'),
-          },
-        });
-
-        setUserData(findUser.data);
+        if (tweet && tweet.TweetedBy._id) {
+          const findUser = await axios.get(
+            `${Base_URL}/api/user/${tweet?.TweetedBy?._id}`,
+            {
+              headers: {
+                Authorization: localStorage.getItem('token'),
+              },
+            }
+          );
+          setUserData(findUser.data);
+        }
       } catch (error) {
         console.log(error);
       }
