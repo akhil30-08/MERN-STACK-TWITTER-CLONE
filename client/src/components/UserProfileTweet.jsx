@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import Tweet from './Tweet';
 import { useParams } from 'react-router-dom';
+import Base_URL from '../utils';
 
 const UserProfileTweet = () => {
   const { id } = useParams();
@@ -11,11 +12,14 @@ const UserProfileTweet = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const timelinetweets = await axios.get(`/api/tweet/tweets/user/${id}`, {
-          headers: {
-            Authorization: localStorage.getItem('token'),
-          },
-        });
+        const timelinetweets = await axios.get(
+          `${Base_URL}/api/tweet/tweets/user/${id}`,
+          {
+            headers: {
+              Authorization: localStorage.getItem('token'),
+            },
+          }
+        );
         setTimeline(timelinetweets.data);
       } catch (error) {
         console.log(error);
