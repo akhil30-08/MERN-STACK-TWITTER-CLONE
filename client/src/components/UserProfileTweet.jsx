@@ -4,7 +4,7 @@ import Tweet from './Tweet';
 import { useParams } from 'react-router-dom';
 
 const UserProfileTweet = () => {
-  let { id } = useParams();
+  const { id } = useParams();
 
   const [timeline, setTimeline] = useState([]);
 
@@ -25,12 +25,13 @@ const UserProfileTweet = () => {
     fetchData();
   }, [id]);
 
+  console.log(Array.isArray(timeline));
   return (
     <>
       {timeline && timeline.length > 0
         ? console.log('map is about to start')
         : console.log('error')}
-      {timeline && timeline.length > 0 ? (
+      {Array.isArray(timeline) && timeline.length > 0 ? (
         timeline.map((tweet) => {
           console.log('map started');
           return <Tweet key={tweet._id} tweet={tweet} setData={setTimeline} />;
