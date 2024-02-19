@@ -29,14 +29,12 @@ const UserProfileTweet = () => {
 
   return (
     <>
-      {!timeline ? (
-        <h5 className='my-4 mx-5'>
-          User has no tweets. Please Tweet something 😄
-        </h5>
-      ) : (
+      {timeline && timeline.length > 0 ? (
         timeline.map((tweet) => {
           return <Tweet key={tweet._id} tweet={tweet} setData={setTimeline} />;
         })
+      ) : (
+        <h5 className='my-4 mx-5'>User has no tweets. Please Tweet something 😄</h5>
       )}
     </>
   );
