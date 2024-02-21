@@ -459,7 +459,7 @@ const Tweet = ({ tweet, setData }) => {
       {userData && (
         <>
           <>
-            <div className='card tweet-card p-1'>
+            <div className='card tweet-card p-1 mx-auto mb-1'>
               <div className='card-body'>
                 {/* for showing who has retweeted the tweet */}
 
@@ -547,18 +547,19 @@ const Tweet = ({ tweet, setData }) => {
 
                   {/* for image */}
                   {TweetImage && (
-                    <div className='row mb-3'>
-                      <div className='col-12 d-flex justify-content-center'>
-                        <img src={TweetImage} className='img-fluid p-2' />
-                      </div>
+                    <div className='d-flex justify-content-center'>
+                      <img
+                        src={TweetImage}
+                        className='img-fluid p-1 object-fit-contain tweet-image-content'
+                      />
                     </div>
                   )}
                 </Link>
 
                 {/* for like,rt buttons */}
                 <div className='row'>
-                  <div className='col-12'>
-                    <div className='ms-5'>
+                  <div className='col-12 d-flex justify-content-center'>
+                    <div>
                       <span
                         className='mx-3 like-button'
                         style={{ cursor: 'pointer' }}

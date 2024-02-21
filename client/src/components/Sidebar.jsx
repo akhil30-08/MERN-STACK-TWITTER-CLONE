@@ -6,7 +6,6 @@ import { logout } from '../redux/userSlice';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector } from 'react-redux';
-import axios from 'axios';
 
 //importing navbar items
 import Container from 'react-bootstrap/Container';
@@ -44,19 +43,19 @@ const Sidebar = () => {
   //now get the profile picture of the current user
   const getProfilePicture = async () => {
     if (
-      currentUser.Profile_Picture &&
-      !currentUser.Profile_Picture.includes(
+      currentUser?.Profile_Picture &&
+      !currentUser?.Profile_Picture.includes(
         'https://1fid.com/wp-content/uploads/2022/06/no-profile-picture-4-1024x1024.jpg'
       )
     ) {
-      const picture = `https://res.cloudinary.com/dbjfwfix8/image/upload/v1696357712/${currentUser.Profile_Picture}.jpg`;
+      const picture = `https://res.cloudinary.com/dbjfwfix8/image/upload/v1696357712/${currentUser?.Profile_Picture}.jpg`;
       setPictureToShow(picture);
     }
   };
 
   useEffect(() => {
     getProfilePicture();
-  }, [currentUser.Profile_Picture]);
+  }, [currentUser?.Profile_Picture]);
 
   return (
     <>
@@ -112,19 +111,22 @@ const Sidebar = () => {
               </div>
 
               {/* div containing info */}
-              <div className='mb-3 d-flex username-info w-75 justify-content-center'>
-                <NavLink to='/my-profile' className='text-decoration-none '>
+              <div className='mb-3 d-flex username-info w-100 justify-content-center rounded-4'>
+                <NavLink
+                  to='/my-profile '
+                  className='text-decoration-none d-flex flex-column justify-content-center align-items-center'
+                >
                   {!PictureToShow ? (
                     <img
                       src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR82DN9JU-hbIhhkPR-AX8KiYzA4fBMVwjLAG82fz7GLg&s'
                       alt='profile-pic'
-                      className=' side-bar-profile-icon ms-2 ms-md-5 img-fluid d-inline-block mb-4'
+                      className=' side-bar-profile-icon img-fluid d-inline-block mb-4'
                     />
                   ) : (
                     <img
                       src={PictureToShow}
                       alt='profile-pic'
-                      className=' side-bar-profile-icon ms-4 img-fluid d-inline-block mb-2'
+                      className=' side-bar-profile-icon img-fluid d-inline-block mb-2'
                     />
                   )}
                   <ul
@@ -132,11 +134,11 @@ const Sidebar = () => {
                     className='text-black d-inline-block me-md-3'
                   >
                     <li>
-                      <h6>{currentUser.Name}</h6>
+                      <h6>{currentUser?.Name}</h6>
                     </li>
                     <li>
                       <p>
-                        @ <span>{currentUser.Username}</span>
+                        @ <span>{currentUser?.Username}</span>
                       </p>
                     </li>
                   </ul>

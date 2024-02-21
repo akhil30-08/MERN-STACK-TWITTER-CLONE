@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 
 const OffCanvas = () => {
   const { currentUser } = useSelector((state) => state.user);
+
   //offcanvas state
   const [show, setShow] = useState(false);
 
@@ -21,19 +22,19 @@ const OffCanvas = () => {
   //now get the profile picture of the current user
   const getProfilePicture = async () => {
     if (
-      currentUser.Profile_Picture &&
-      !currentUser.Profile_Picture.includes(
+      currentUser?.Profile_Picture &&
+      !currentUser?.Profile_Picture.includes(
         'https://1fid.com/wp-content/uploads/2022/06/no-profile-picture-4-1024x1024.jpg'
       )
     ) {
-      const picture = `https://res.cloudinary.com/dbjfwfix8/image/upload/v1696357712/${currentUser.Profile_Picture}.jpg`;
+      const picture = `https://res.cloudinary.com/dbjfwfix8/image/upload/v1696357712/${currentUser?.Profile_Picture}.jpg`;
       setPictureToShow(picture);
     }
   };
 
   useEffect(() => {
     getProfilePicture();
-  }, [currentUser.Profile_Picture]);
+  }, [currentUser?.Profile_Picture]);
 
   return (
     <>
@@ -97,11 +98,11 @@ const OffCanvas = () => {
                   className='text-black d-inline-block me-md-3'
                 >
                   <li>
-                    <h6>{currentUser.Name}</h6>
+                    <h6>{currentUser?.Name}</h6>
                   </li>
                   <li>
                     <p>
-                      @ <span>{currentUser.Username}</span>
+                      @ <span>{currentUser?.Username}</span>
                     </p>
                   </li>
                 </ul>

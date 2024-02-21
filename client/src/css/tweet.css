@@ -31,7 +31,14 @@
 }
 
 .tweet-card {
-  margin: 0.2%;
+  max-height: 380px;
+  max-width: 400px;
+}
+
+.tweet-image-content {
+  max-height: 222px;
+  max-width: 300px;
+  border-radius: 10px;
 }
 
 .tweet-card:hover {

@@ -28,7 +28,7 @@ const MyProfile = () => {
 
   const [user, setUser] = useState(null);
   const [followState, setFollowState] = useState(
-    currentUser.Following.includes(id) ? 'Following' : 'Follow'
+    currentUser?.Following.includes(id) ? 'Following' : 'Follow'
   );
 
   const config = {
@@ -71,7 +71,7 @@ const MyProfile = () => {
 
         //now update the current user
         const updatedCurrentUser = await axios.get(
-          `${Base_URL}/api/user/${currentUser._id}`,
+          `${Base_URL}/api/user/${currentUser?._id}`,
           config
         );
         dispatch(updateUser(updatedCurrentUser.data));
@@ -86,7 +86,7 @@ const MyProfile = () => {
 
         //now update the current user
         const updatedCurrentUser = await axios.get(
-          `${Base_URL}/api/user/${currentUser._id}`,
+          `${Base_URL}/api/user/${currentUser?._id}`,
           config
         );
         dispatch(updateUser(updatedCurrentUser.data));
@@ -137,7 +137,7 @@ const MyProfile = () => {
   };
 
   useEffect(() => {
-    if (user && user.Profile_Picture) {
+    if (user && user?.Profile_Picture) {
       getProfilePicture();
     }
   }, [user]);
@@ -147,124 +147,95 @@ const MyProfile = () => {
         <title>User Profile</title>
       </Helmet>
 
-      {currentUser ? (
-        <div className='row'>
-          <div className='col-md-3 '>
-            <div className='side-bar-row d-flex flex-column align-items-center justify-content-between  '>
-              <Sidebar />
-            </div>
-          </div>
+      {/* Profile section */}
+      <div className='row'>
+        <div className='col-12'>
+          <div className='container mt-2'>
+            {/* blue colour div */}
+            <div id='blue-box'></div>
 
-          <div className='col-md-6 second-column'>
-            <div className='row my-2'>
-              <div className='col-12 d-flex justify-content-between'>
-                <h5 className='ms-1'>Profile</h5>
+            {/* information-box */}
+            <div className='row profile-icon-row'>
+              <div className='col-5'>
+                <span className='ms-3'>
+                  {PictureToShow ? (
+                    <img src={PictureToShow} className='img-fluid' id='profilePicture' />
+                  ) : (
+                    <img
+                      src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR82DN9JU-hbIhhkPR-AX8KiYzA4fBMVwjLAG82fz7GLg&s'
+                      className='img-fluid'
+                      id='profilePicture'
+                    />
+                  )}
+                </span>
+              </div>
+
+              <div className='col-7 '>
+                <button
+                  type='submit'
+                  style={{ width: '8rem' }}
+                  className='btn btn-dark ms-2 mt-2 float-end me-2'
+                  onClick={handleFollowUnfollow}
+                >
+                  {followState}
+                </button>
               </div>
             </div>
 
-            {/* Profile section */}
-            <div className='row'>
-              <div className='col-12'>
-                <div className='container mt-2'>
-                  {/* blue colour div */}
-                  <div id='blue-box'></div>
+            {user && (
+              <div className='row'>
+                <div className='col-12'>
+                  <h6>{user.Name}</h6>
+                  <p className='text-muted'>@{user?.Username}</p>
 
-                  {/* information-box */}
-                  <div className='row profile-icon-row'>
-                    <div className='col-5'>
-                      <span className='ms-3'>
-                        {PictureToShow ? (
-                          <img
-                            src={PictureToShow}
-                            className='img-fluid'
-                            id='profilePicture'
-                          />
-                        ) : (
-                          <img
-                            src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR82DN9JU-hbIhhkPR-AX8KiYzA4fBMVwjLAG82fz7GLg&s'
-                            className='img-fluid'
-                            id='profilePicture'
-                          />
-                        )}
+                  {user?.DateOfBirth && (
+                    <span className='text-muted'>
+                      <i className='fa-solid fa-cake-candles me-2'></i>
+                      <span className='me-2'>DOB</span>
+                      <span>
+                        {user && format(new Date(user.DateOfBirth), 'EE MMM dd yyyy')}
                       </span>
-                    </div>
+                    </span>
+                  )}
 
-                    <div className='col-7 '>
-                      <button
-                        type='submit'
-                        style={{ width: '8rem' }}
-                        className='btn btn-dark ms-2 mt-2 float-end me-2'
-                        onClick={handleFollowUnfollow}
-                      >
-                        {followState}
-                      </button>
-                    </div>
-                  </div>
-
-                  {user && (
-                    <div className='row'>
-                      <div className='col-12'>
-                        <h6>{user.Name}</h6>
-                        <p className='text-muted'>@{user.Username}</p>
-
-                        {user.DateOfBirth && (
-                          <span className='text-muted'>
-                            <i className='fa-solid fa-cake-candles me-2'></i>
-                            <span className='me-2'>DOB</span>
-                            <span>
-                              {format(new Date(user.DateOfBirth), 'EE MMM dd yyyy')}
-                            </span>
-                          </span>
-                        )}
-
-                        {user.Location && (
-                          <div
-                            className='text-muted mx-4'
-                            style={{ display: 'inline-block' }}
-                          >
-                            <i className='fa-solid fa-location-dot me-2'></i>
-                            <span className='me-2'>Location</span>
-                            <span>{user.Location}</span>
-                          </div>
-                        )}
-
-                        <div className='text-muted'>
-                          <i className='fa-solid fa-calendar me-2'></i>
-                          <span className='me-2'>Joined</span>
-                          <span>
-                            {format(new Date(user.createdAt), 'EE MMM dd yyyy')}
-                          </span>
-                        </div>
-
-                        {/* followers and following information */}
-                        <span className='fw-medium mt-2 '>
-                          <span>{user.Following.length}</span>
-                          <span className='mx-1'>Following</span>
-                        </span>
-
-                        <span
-                          className='fw-medium mt-2 mx-4'
-                          style={{ display: 'inline-block' }}
-                        >
-                          <span>{user.Followers.length}</span>
-                          <span className='mx-1'>Followers</span>
-                        </span>
-                      </div>
+                  {user?.Location && (
+                    <div className='text-muted mx-4' style={{ display: 'inline-block' }}>
+                      <i className='fa-solid fa-location-dot me-2'></i>
+                      <span className='me-2'>Location</span>
+                      <span>{user?.Location}</span>
                     </div>
                   )}
-                </div>
 
-                <h6 className='text-center mt-3'>Tweets and Replies</h6>
-                <UserProfileTweet />
+                  <div className='text-muted'>
+                    <i className='fa-solid fa-calendar me-2'></i>
+                    <span className='me-2'>Joined</span>
+                    <span>
+                      {user && format(new Date(user.createdAt), 'EE MMM dd yyyy')}
+                    </span>
+                  </div>
+
+                  {/* followers and following information */}
+                  <span className='fw-medium mt-2 '>
+                    <span>{user?.Following.length}</span>
+                    <span className='mx-1'>Following</span>
+                  </span>
+
+                  <span
+                    className='fw-medium mt-2 mx-4'
+                    style={{ display: 'inline-block' }}
+                  >
+                    <span>{user.Followers.length}</span>
+                    <span className='mx-1'>Followers</span>
+                  </span>
+                </div>
               </div>
-            </div>
+            )}
           </div>
 
-          <div className='col-md-3'></div>
+          <h6 className='text-center mt-3'>Tweets and Replies</h6>
+          <UserProfileTweet />
         </div>
-      ) : (
-        <Login />
-      )}
+      </div>
     </>
   );
 };

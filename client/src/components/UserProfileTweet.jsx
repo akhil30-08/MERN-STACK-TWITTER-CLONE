@@ -29,12 +29,8 @@ const UserProfileTweet = () => {
     fetchData();
   }, [id]);
 
-  console.log(Array.isArray(timeline));
   return (
     <>
-      {timeline && timeline.length > 0
-        ? console.log('map is about to start')
-        : console.log('error')}
       {Array.isArray(timeline) && timeline.length > 0 ? (
         timeline.map((tweet) => {
           console.log('map started');

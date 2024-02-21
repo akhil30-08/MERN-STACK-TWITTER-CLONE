@@ -162,7 +162,7 @@ const MyProfile = () => {
 
   useEffect(() => {
     getProfilePicture();
-  }, [currentUser.Profile_Picture]);
+  }, [currentUser?.Profile_Picture]);
 
   return (
     <>
@@ -170,126 +170,98 @@ const MyProfile = () => {
         <title>My Profile</title>
       </Helmet>
 
+      {/* Profile section */}
       <div className='row'>
-        <div className='col-md-3 d-none d-md-block'>
-          <div className='side-bar-row d-flex flex-column align-items-center justify-content-between  '>
-            <Sidebar />
-          </div>
-        </div>
+        <div className='col-12'>
+          <div className='container mt-2'>
+            {/* blue colour div */}
+            <div id='blue-box'></div>
 
-        <div className='col-sm-12 col-md-6 second-column'>
-          <div className='row sticky-top-sm bg-white'>
-            <div className='col-12 d-flex'>
-              <OffCanvas />
-              <h5 className='ms-1 align-self-baseline'>Profile</h5>
-            </div>
-          </div>
-
-          {/* Profile section */}
-          <div className='row'>
-            <div className='col-12'>
-              <div className='container mt-2'>
-                {/* blue colour div */}
-                <div id='blue-box'></div>
-
-                {/* information-box */}
-                <div className='row profile-icon-row'>
-                  <div className='col-4'>
-                    <span className='ms-3'>
-                      {PictureToShow ? (
-                        <img
-                          src={PictureToShow}
-                          className='img-fluid'
-                          id='profilePicture'
-                        />
-                      ) : (
-                        <img
-                          src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR82DN9JU-hbIhhkPR-AX8KiYzA4fBMVwjLAG82fz7GLg&s'
-                          className='img-fluid'
-                          id='profilePicture'
-                        />
-                      )}
-                    </span>
-                  </div>
-
-                  <div className='col-8 d-flex justify-content-end gap-2 h-75 '>
-                    <button
-                      type='submit'
-                      className='btn btn-outline-primary mt-2 modal-button btn-sm'
-                      onClick={handleShowUpload}
-                    >
-                      Upload Profile Picture
-                    </button>
-                    <button
-                      type='submit'
-                      className='btn btn-outline-secondary mt-2 modal-button btn-sm'
-                      onClick={handleShowEdit}
-                    >
-                      Edit
-                    </button>
-                  </div>
-                </div>
-
-                <div className='row'>
-                  <div className='col-12'>
-                    <h6>{currentUser.Name}</h6>
-                    <p className='text-muted'>
-                      @<span>{currentUser.Username}</span>
-                    </p>
-
-                    {currentUser.DateOfBirth && (
-                      <span className='text-muted'>
-                        <i className='fa-solid fa-cake-candles me-2'></i>
-                        <span className='me-2'>DOB</span>
-                        <span>
-                          {format(new Date(currentUser.DateOfBirth), 'EE MMM dd yyyy')}
-                        </span>
-                      </span>
-                    )}
-
-                    {currentUser.Location && (
-                      <div
-                        className='text-muted mx-4'
-                        style={{ display: 'inline-block' }}
-                      >
-                        <i className='fa-solid fa-location-dot me-2'></i>
-                        <span className='me-2'>Location</span>
-                        <span>{currentUser.Location}</span>
-                      </div>
-                    )}
-
-                    <div className='text-muted'>
-                      <i className='fa-solid fa-calendar me-2'></i>
-                      <span className='me-2'>Joined</span>
-                      <span>
-                        {format(new Date(currentUser.createdAt), 'EE MMM dd yyyy')}
-                      </span>
-                    </div>
-
-                    {/* followers and following information */}
-                    <span className='fw-medium mt-2 '>
-                      <span>{currentUser.Following.length}</span>
-                      <span className='mx-1'>Following</span>
-                    </span>
-
-                    <span
-                      className='fw-medium mt-2 mx-4'
-                      style={{ display: 'inline-block' }}
-                    >
-                      <span>{currentUser.Followers.length}</span>
-                      <span className='mx-1'>Followers</span>
-                    </span>
-                  </div>
-                </div>
+            {/* information-box */}
+            <div className='row profile-icon-row'>
+              <div className='col-4'>
+                <span className='ms-3'>
+                  {PictureToShow ? (
+                    <img src={PictureToShow} className='img-fluid' id='profilePicture' />
+                  ) : (
+                    <img
+                      src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR82DN9JU-hbIhhkPR-AX8KiYzA4fBMVwjLAG82fz7GLg&s'
+                      className='img-fluid'
+                      id='profilePicture'
+                    />
+                  )}
+                </span>
               </div>
 
-              <h6 className='text-center mt-3'>Tweets and Replies</h6>
-              <MyProfileTweet />
+              <div className='col-8 d-flex justify-content-end gap-2 h-75 '>
+                <button
+                  type='submit'
+                  className='btn btn-outline-primary mt-2 modal-button btn-sm'
+                  onClick={handleShowUpload}
+                >
+                  Upload Profile Picture
+                </button>
+                <button
+                  type='submit'
+                  className='btn btn-outline-secondary mt-2 modal-button btn-sm'
+                  onClick={handleShowEdit}
+                >
+                  Edit
+                </button>
+              </div>
+            </div>
+
+            <div className='row'>
+              <div className='col-12'>
+                <h6>{currentUser?.Name}</h6>
+                <p className='text-muted'>
+                  @<span>{currentUser?.Username}</span>
+                </p>
+
+                {currentUser?.DateOfBirth && (
+                  <span className='text-muted'>
+                    <i className='fa-solid fa-cake-candles me-2'></i>
+                    <span className='me-2'>DOB</span>
+                    <span>
+                      {format(new Date(currentUser?.DateOfBirth), 'EE MMM dd yyyy')}
+                    </span>
+                  </span>
+                )}
+
+                {currentUser?.Location && (
+                  <div className='text-muted mx-lg-4' style={{ display: 'inline-block' }}>
+                    <i className='fa-solid fa-location-dot me-2'></i>
+                    <span className='me-2'>Location</span>
+                    <span>{currentUser?.Location}</span>
+                  </div>
+                )}
+
+                <div className='text-muted'>
+                  <i className='fa-solid fa-calendar me-2'></i>
+                  <span className='me-2'>Joined</span>
+                  <span>
+                    {currentUser &&
+                      format(new Date(currentUser?.createdAt), 'EE MMM dd yyyy')}
+                  </span>
+                </div>
+
+                {/* followers and following information */}
+                <span className='fw-medium mt-2 '>
+                  <span>{currentUser?.Following.length}</span>
+                  <span className='mx-1'>Following</span>
+                </span>
+
+                <span className='fw-medium mt-2 mx-4' style={{ display: 'inline-block' }}>
+                  <span>{currentUser?.Followers.length}</span>
+                  <span className='mx-1'>Followers</span>
+                </span>
+              </div>
             </div>
           </div>
-        </div>
 
-        <div className='col-md-3 d-none d-md-block'></div>
+          <h6 className='text-center mt-3'>Tweets and Replies</h6>
+          <MyProfileTweet />
+        </div>
       </div>
 
       {/* for showing modal component of edit profile */}
