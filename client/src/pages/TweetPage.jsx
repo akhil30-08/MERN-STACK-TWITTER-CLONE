@@ -4,8 +4,6 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Helmet } from 'react-helmet-async';
 import Base_URL from '../utils';
-
-import Sidebar from '../components/Sidebar';
 import Tweet from '../components/Tweet';
 import '../css/tweetpage.css';
 
@@ -57,45 +55,28 @@ const TweetPage = () => {
       <Helmet>
         <title>Tweet details</title>
       </Helmet>
+
+      {/* Tweets section */}
       <div className='row'>
-        <div className='col-md-3 '>
-          <div className='side-bar-row d-flex flex-column align-items-center justify-content-between  '>
-            <Sidebar />
-          </div>
+        <div className='col-12'>
+          {timeline.length > 0 &&
+            timeline.map((tweet) => {
+              return <Tweet key={tweet._id} tweet={tweet} setData={setTimeline} />;
+            })}
         </div>
+      </div>
 
-        <div className='col-md-6 second-column'>
-          <div className='row my-2'>
-            <div className='col-12'>
-              <h5 className='ms-1'>Tweet</h5>
-            </div>
-          </div>
-
-          {/* Tweets section */}
-          <div className='row'>
-            <div className='col-12'>
-              {timeline.length > 0 &&
-                timeline.map((tweet) => {
-                  return <Tweet key={tweet._id} tweet={tweet} setData={setTimeline} />;
-                })}
-            </div>
-          </div>
-
-          <div className='row my-2'>
-            <div className='col-12'>
-              <h6 className='mb-2'>Replies</h6>
-              {replies.length > 0 ? (
-                replies.map((tweet) => {
-                  return <Tweet key={tweet._id} tweet={tweet} setData={setReplies} />;
-                })
-              ) : (
-                <p>No replies found.</p>
-              )}
-            </div>
-          </div>
+      <div className='row my-2'>
+        <div className='col-12'>
+          <h6 className='mb-2'>Replies</h6>
+          {replies.length > 0 ? (
+            replies.map((tweet) => {
+              return <Tweet key={tweet._id} tweet={tweet} setData={setReplies} />;
+            })
+          ) : (
+            <p>No replies found.</p>
+          )}
         </div>
-
-        <div className='col-md-3'></div>
       </div>
     </>
   );

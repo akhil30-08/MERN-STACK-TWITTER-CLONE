@@ -6,6 +6,7 @@ import { navLinks } from '../constants/index.js';
 import { NavLink } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import '../css/offcanvas.css';
 
 const OffCanvas = () => {
   const { currentUser } = useSelector((state) => state.user);
@@ -57,7 +58,7 @@ const OffCanvas = () => {
             ></i>
           </Offcanvas.Title>
         </Offcanvas.Header>
-        <Offcanvas.Body>
+        <Offcanvas.Body className='p-0 '>
           <aside className='d-flex flex-column h-100 justify-content-between'>
             {/* NavLinks */}
             <ul>
@@ -66,11 +67,14 @@ const OffCanvas = () => {
                 return (
                   <li
                     key={link.name}
-                    className={`btn btn-primary home-button my-1 ${
+                    className={`btn btn-primary home-button offcanvas-button my-1 ${
                       isActive && 'activeLink'
                     }`}
                   >
-                    <NavLink to={link.route} className='text-decoration-none'>
+                    <NavLink to={link.route} className='text-decoration-none text-dark '>
+                      <span className='mx-2'>
+                        <i className={link.icon}></i>
+                      </span>
                       {link.name}
                     </NavLink>
                   </li>
@@ -84,13 +88,13 @@ const OffCanvas = () => {
                   <img
                     src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR82DN9JU-hbIhhkPR-AX8KiYzA4fBMVwjLAG82fz7GLg&s'
                     alt='profile-pic'
-                    className=' side-bar-profile-icon ms-2 ms-md-5 img-fluid d-inline-block mb-4'
+                    className='offcanvas-profile-icon ms-2 ms-md-5 img-fluid d-inline-block mb-4'
                   />
                 ) : (
                   <img
                     src={PictureToShow}
                     alt='profile-pic'
-                    className=' side-bar-profile-icon ms-4 img-fluid d-inline-block mb-2'
+                    className='offcanvas-profile-icon ms-4 img-fluid d-inline-block mb-2'
                   />
                 )}
                 <ul

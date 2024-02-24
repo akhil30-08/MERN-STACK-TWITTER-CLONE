@@ -7,7 +7,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/api': {
-        target: 'https://ill-gold-hare.cyclic.app',
+        target: 'https://mern-stack-twitter-clone-krf9.onrender.com',
         changeOrigin: true,
         secure: true,
       },

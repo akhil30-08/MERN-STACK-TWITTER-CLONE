@@ -1,5 +1,5 @@
 import '../css/tweet.css';
-import { Link, useLocation, useNavigate, NavLink } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
@@ -493,7 +493,7 @@ const Tweet = ({ tweet, setData }) => {
                       )}
                     </span>
 
-                    <span className='ms-2'>
+                    <span className='ms-2 fs-6'>
                       {tweet.TweetedBy._id !== currentUser._id ? (
                         <span>
                           <Link
@@ -505,7 +505,7 @@ const Tweet = ({ tweet, setData }) => {
                         </span>
                       ) : (
                         <span>
-                          <Link to='/my-profile' className='username-mentioned'>
+                          <Link to='/my-profile' className='username-mentioned '>
                             <span>@{userData.Username}</span>
                           </Link>
                         </span>
@@ -513,7 +513,7 @@ const Tweet = ({ tweet, setData }) => {
                     </span>
                     <span className='ms-2'>
                       -
-                      <span className='text-muted ms-1'>
+                      <span className='text-muted ms-1 date-created-at'>
                         {format(new Date(tweet.createdAt), 'EE MMM dd yyyy')}
                       </span>
                     </span>
@@ -540,8 +540,8 @@ const Tweet = ({ tweet, setData }) => {
                 >
                   {/* for showing tweetcontent */}
                   <div className='row p-0'>
-                    <div className='col-12 d-flex justify-content-start p-0 align-items-end'>
-                      <p className='tweet-content'>{tweet.Content}</p>
+                    <div className='col-12 d-flex align-items-center ms-4 mt-1'>
+                      {tweet.Content}
                     </div>
                   </div>
 

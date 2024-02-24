@@ -35,3 +35,13 @@
     font-size: 12px;
   }
 }
+
+@media only screen and (max-width: 324px) {
+  #profilePicture {
+    width: 4rem;
+    height: 4rem;
+    border-radius: 50%;
+    position: relative;
+    bottom: 2rem;
+  }
+}

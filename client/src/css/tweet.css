@@ -5,7 +5,7 @@
 }
 
 .username-mentioned {
-  color: black;
+  color: rgb(2, 2, 2);
   text-decoration: none;
   font-weight: 600;
 }
@@ -62,8 +62,18 @@
   top: 8px;
 }
 
-@media screen and (min-width: 720px) {
-  .spinner {
-    left: 4em;
+@media screen and (max-width: 376px) {
+  .username-mentioned {
+    font-size: small;
+  }
+
+  .tweet-profile-pic {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 100%;
+  }
+
+  .date-created-at {
+    font-size: x-small;
   }
 }

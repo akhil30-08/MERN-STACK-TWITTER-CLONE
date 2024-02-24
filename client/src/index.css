@@ -9,3 +9,18 @@
   background-color: rgb(160, 212, 228) !important;
   color: black;
 }
+
+.spinner {
+  position: fixed !important;
+  top: 5px;
+  left: 50svw;
+}
+
+@media screen and (max-width: 426px) {
+  .spinner {
+    position: fixed !important;
+    top: 10px;
+    left: 45svw;
+    z-index: 100;
+  }
+}
