@@ -106,7 +106,13 @@ const Tweet = ({ tweet, setData }) => {
     };
 
     fetchData();
-  }, [tweet.TweetedBy._id, tweet.Replies, tweet.RetweetBy, tweet.Image]);
+  }, [
+    tweet.TweetedBy._id,
+    tweet.Replies,
+    tweet.RetweetBy,
+    tweet.Image,
+    currentUser?.Profile_Picture,
+  ]);
 
   const handleLikeUnlike = async (e) => {
     e.preventDefault();

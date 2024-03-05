@@ -1,4 +1,4 @@
-import { Outlet, useLocation } from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import Sidebar from '../components/Sidebar';
 import OffCanvas from '../components/Offcanvas';
 import Modal from 'react-bootstrap/Modal';
@@ -12,11 +12,11 @@ import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { updateUser } from '../redux/userSlice';
 import { useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 
 const RootLayout = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const { currentUser } = useSelector((state) => state.user);
 
   useEffect(() => {
@@ -89,6 +89,15 @@ const RootLayout = () => {
       theme: 'light',
     });
 
+  let title = 'Home';
+  if (pathname === '/my-profile') {
+    title = 'My Profile';
+  } else if (pathname.includes('/user-profile')) {
+    title = 'User Profile';
+  } else if (pathname.includes('/tweet/')) {
+    title = 'Tweet';
+  }
+
   return (
     <section>
       <div className='row'>
@@ -107,7 +116,7 @@ const RootLayout = () => {
               <OffCanvas />
 
               <div className='d-flex justify-content-between' style={{ width: '30rem' }}>
-                <h5 className='ms-1 align-self-baseline'>Profile</h5>
+                <h5 className='ms-1 align-self-baseline'>{title}</h5>
                 <button
                   type='submit'
                   className='btn btn-primary homepage-tweet-btn me-1 float-end'

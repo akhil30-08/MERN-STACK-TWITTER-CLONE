@@ -43,7 +43,7 @@ function App() {
           <Route exact path='/tweet/:id' element={<TweetPage />} />
         </Route>
       </Routes>
-      <ToastContainer autoClose={600} />
+      <ToastContainer autoClose={500} />
     </>
   );
 }
