@@ -7,6 +7,7 @@ const path = require('path');
 const Port = process.env.PORT || 8000;
 
 const dotenv = require('dotenv');
+const { dBConnect } = require('./dbConnect');
 dotenv.config();
 
 app.use(cors());
@@ -14,12 +15,12 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, '../client/dist')));
 
-//Connecting to MONGODB
-mongoose.connect(process.env.MONGODBURL);
+// //Connecting to MONGODB
+// mongoose.connect(process.env.MONGODBURL);
 
-//Checking if it is connected
-mongoose.connection.on('connected', () => console.log('DB Connected'));
-mongoose.connection.on('error', (error) => console.log(error));
+// //Checking if it is connected
+// mongoose.connection.on('connected', () => console.log('DB Connected'));
+// mongoose.connection.on('error', (error) => console.log(error));
 
 //inserting schemas
 require('./models/user_model');
@@ -32,7 +33,11 @@ app.use('/api/tweet', require('./routes/tweet'));
 
 //testing route
 app.get('/deploy', (req, res) => {
-  return res.status(200).send(`<h1>Deployed successfully</h1>`);
+   return res.status(200).send(`<h1>Deployed successfully</h1>`);
 });
 
+dBConnect();
+
 app.listen(Port, () => console.log(`Server Connected at Port ${Port}`));
+
+module.exports = app; //vercel serverless functionality
