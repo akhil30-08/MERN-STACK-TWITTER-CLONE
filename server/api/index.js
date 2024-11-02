@@ -1,13 +1,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
-const { MONGODB_URL } = require('./config');
+const { MONGODB_URL } = require('../config');
 const app = express();
 const path = require('path');
 const Port = process.env.PORT || 8000;
 
 const dotenv = require('dotenv');
-const { dBConnect } = require('./dbConnect');
+const { dBConnect } = require('../dbConnect');
 dotenv.config();
 
 app.use(cors());
@@ -23,13 +23,13 @@ app.use(express.static(path.join(__dirname, '../client/dist')));
 // mongoose.connection.on('error', (error) => console.log(error));
 
 //inserting schemas
-require('./models/user_model');
-require('./models/tweet_model');
+require('../models/user_model');
+require('../models/tweet_model');
 
 //inserting routes
-app.use('/API/auth', require('./routes/auth'));
-app.use('/API', require('./routes/user'));
-app.use('/api/tweet', require('./routes/tweet'));
+app.use('/API/auth', require('../routes/auth'));
+app.use('/API', require('../routes/user'));
+app.use('/api/tweet', require('../routes/tweet'));
 
 //testing route
 app.get('/deploy', (req, res) => {
