@@ -16,6 +16,9 @@ function Login() {
    const [Username, setUsername] = useState('');
    const [Password, setPassword] = useState('');
    const [loading, setLoading] = useState(false);
+   const [showPassword, setShowPassword] = useState(false);
+
+   const handleShowPassword = () => setShowPassword(!showPassword);
 
    //initialise usenavigate and usedispatch
    const navigate = useNavigate();
@@ -95,13 +98,27 @@ function Login() {
                   onChange={(e) => setUsername(e.target.value)}
                ></input>
                <input
-                  type='password'
-                  className='form-control mt-3'
+                  type={showPassword ? 'text' : 'password'}
+                  className='form-control mt-3 '
                   id='exampleInputPassword1'
                   placeholder='Password'
                   value={Password}
                   onChange={(e) => setPassword(e.target.value)}
                ></input>
+
+               <div className='mt-2'>
+                  <input
+                     type='checkbox'
+                     id='showPassword'
+                     name='showPassword'
+                     value='true'
+                     className='mx-2 text-bg-success'
+                     checked={showPassword}
+                     onChange={handleShowPassword}
+                  ></input>
+                  <label htmlFor='showPassword'>Show Password</label>
+               </div>
+
                <button
                   type='submit'
                   className='mt-3 px-3 btn btn-dark'
